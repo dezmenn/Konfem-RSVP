@@ -1,0 +1,45 @@
+{
+  "name": "rsvp-planning-app",
+  "version": "1.0.0",
+  "description": "RSVP Planning App - Event management system with mobile and web interfaces",
+  "private": true,
+  "workspaces": [
+    "rsvp-backend",
+    "rsvp-web",
+    "shared"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:web\" \"npm run dev:shared\"",
+    "dev:backend": "cd rsvp-backend && npm run dev",
+    "dev:web": "cd rsvp-web && npm start",
+    "dev:mobile": "cd rsvp-mobile && npm start -- --reset-cache",
+    "dev:shared": "cd shared && npm run dev",
+    "build": "npm run build:shared && npm run build:backend && npm run build:web",
+    "build:backend": "cd rsvp-backend && npm run build",
+    "build:web": "cd rsvp-web && npm run build",
+    "build:shared": "cd shared && npm run build",
+    "install:all": "npm install && npm run install:backend && npm run install:web && npm run install:mobile && npm run install:shared",
+    "install:backend": "cd rsvp-backend && npm install",
+    "install:web": "cd rsvp-web && npm install",
+    "install:mobile": "cd rsvp-mobile && npm install",
+    "install:shared": "cd shared && npm install",
+    "test": "npm run test:backend && npm run test:web",
+    "test:backend": "cd rsvp-backend && npm test",
+    "test:web": "cd rsvp-web && npm test -- --watchAll=false"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "puppeteer": "^24.15.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "react-native-paper": "^5.0.0",
+    "react-native-gesture-handler": "^2.0.0",
+    "axios": "^1.11.0",
+    "bmad-method": "^4.40.0",
+    "node-fetch": "^3.3.2"
+  }
+}

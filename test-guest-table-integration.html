@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest-Table Integration Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .section {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 15px;
+        }
+        
+        .section h3 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        
+        .guest-item {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .guest-info {
+            flex: 1;
+        }
+        
+        .guest-name {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .guest-details {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .table-assignment {
+            background: #f3e5f5;
+            color: #7b1fa2;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+        
+        .table-actions {
+            display: flex;
+            gap: 5px;
+            margin-left: 10px;
+        }
+        
+        .btn {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.7em;
+            transition: all 0.2s;
+        }
+        
+        .btn-view {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .btn-unassign {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-assign {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .table-item {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .table-item:hover {
+            border-color: #007bff;
+            box-shadow: 0 2px 4px rgba(0,123,255,0.1);
+        }
+        
+        .table-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .table-capacity {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .table-guests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+        
+        .table-guest {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.8em;
+        }
+        
+        .status-bar {
+            background: #e9ecef;
+            padding: 15px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .highlight {
+            background: #fff3cd !important;
+            border-color: #ffc107 !important;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔗 Guest-Table Integration Test</h1>
+            <p>Testing the linking between guest list and table arrangement</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h3>👥 Guest List</h3>
+                <div id="guest-list">
+                    <!-- Guests will be populated here -->
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>🪑 Table Layout</h3>
+                <div id="table-layout">
+                    <!-- Tables will be populated here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="status-bar">
+            <span id="status">Ready to test guest-table linking...</span>
+        </div>
+    </div>
+
+    <script>
+        // Mock data for testing
+        const mockGuests = [
+            { id: '1', name: 'John Smith', tableAssignment: 'Table 1', side: 'groom', relationship: 'friend' },
+            { id: '2', name: 'Jane Doe', tableAssignment: 'Table 1', side: 'bride', relationship: 'sister' },
+            { id: '3', name: 'Bob Johnson', tableAssignment: 'Table 2', side: 'groom', relationship: 'cousin' },
+            { id: '4', name: 'Alice Brown', tableAssignment: null, side: 'bride', relationship: 'friend' },
+            { id: '5', name: 'Charlie Wilson', tableAssignment: null, side: 'groom', relationship: 'colleague' },
+            { id: '6', name: 'Diana Prince', tableAssignment: 'Table 2', side: 'bride', relationship: 'friend' }
+        ];
+        
+        const mockTables = [
+            { id: 't1', name: 'Table 1', capacity: 8, assignedGuests: ['1', '2'] },
+            { id: 't2', name: 'Table 2', capacity: 6, assignedGuests: ['3', '6'] },
+            { id: 't3', name: 'Table 3', capacity: 8, assignedGuests: [] },
+            { id: 't4', name: 'Table 4', capacity: 10, assignedGuests: [] }
+        ];
+        
+        function renderGuests() {
+            const guestList = document.getElementById('guest-list');
+            guestList.innerHTML = '';
+            
+            mockGuests.forEach(guest => {
+                const guestDiv = document.createElement('div');
+                guestDiv.className = 'guest-item';
+                guestDiv.dataset.guestId = guest.id;
+                
+                const isAssigned = guest.tableAssignment;
+                
+                guestDiv.innerHTML = `
+                    <div class="guest-info">
+                        <div class="guest-name">${guest.name}</div>
+                        <div class="guest-details">${guest.side} side • ${guest.relationship}</div>
+                    </div>
+                    ${isAssigned ? `
+                        <span class="table-assignment">${guest.tableAssignment}</span>
+                        <div class="table-actions">
+                            <button class="btn btn-view" onclick="viewTable('${guest.tableAssignment}', '${guest.id}')" title="View table layout">📍</button>
+                            <button class="btn btn-unassign" onclick="unassignGuest('${guest.id}')" title="Remove from table">✕</button>
+                        </div>
+                    ` : `
+                        <span style="color: #6c757d; font-style: italic;">Unassigned</span>
+                        <div class="table-actions">
+                            <button class="btn btn-assign" onclick="assignGuest('${guest.id}')" title="Assign to table">+</button>
+                        </div>
+                    `}
+                `;
+                
+                guestList.appendChild(guestDiv);
+            });
+        }
+        
+        function renderTables() {
+            const tableLayout = document.getElementById('table-layout');
+            tableLayout.innerHTML = '';
+            
+            mockTables.forEach(table => {
+                const tableDiv = document.createElement('div');
+                tableDiv.className = 'table-item';
+                tableDiv.dataset.tableId = table.id;
+                
+                const assignedGuestNames = table.assignedGuests.map(guestId => {
+                    const guest = mockGuests.find(g => g.id === guestId);
+                    return guest ? guest.name : 'Unknown';
+                });
+                
+                tableDiv.innerHTML = `
+                    <div class="table-name">${table.name}</div>
+                    <div class="table-capacity">${table.assignedGuests.length}/${table.capacity} seats</div>
+                    <div class="table-guests">
+                        ${assignedGuestNames.map(name => `<span class="table-guest">${name}</span>`).join('')}
+                        ${table.assignedGuests.length === 0 ? '<span style="color: #999; font-style: italic;">Empty table</span>' : ''}
+                    </div>
+                `;
+                
+                tableLayout.appendChild(tableDiv);
+            });
+        }
+        
+        function updateStatus(message) {
+            document.getElementById('status').textContent = message;
+        }
+        
+        function viewTable(tableName, guestId) {
+            // Highlight the table
+            const tableElement = document.querySelector(`[data-table-id]`);
+            const tables = document.querySelectorAll('.table-item');
+            
+            tables.forEach(table => {
+                if (table.querySelector('.table-name').textContent === tableName) {
+                    table.classList.add('highlight');
+                    setTimeout(() => table.classList.remove('highlight'), 3000);
+                }
+            });
+            
+            updateStatus(`Viewing ${tableName} for guest ${mockGuests.find(g => g.id === guestId)?.name}`);
+        }
+        
+        function assignGuest(guestId) {
+            const guest = mockGuests.find(g => g.id === guestId);
+            if (!guest) return;
+            
+            // Simple assignment to first available table
+            const availableTable = mockTables.find(t => t.assignedGuests.length < t.capacity);
+            
+            if (availableTable) {
+                guest.tableAssignment = availableTable.name;
+                availableTable.assignedGuests.push(guestId);
+                
+                updateStatus(`Assigned ${guest.name} to ${availableTable.name}`);
+                renderGuests();
+                renderTables();
+            } else {
+                updateStatus('No available tables for assignment');
+            }
+        }
+        
+        function unassignGuest(guestId) {
+            const guest = mockGuests.find(g => g.id === guestId);
+            if (!guest || !guest.tableAssignment) return;
+            
+            // Remove from table
+            const table = mockTables.find(t => t.name === guest.tableAssignment);
+            if (table) {
+                table.assignedGuests = table.assignedGuests.filter(id => id !== guestId);
+            }
+            
+            const oldTable = guest.tableAssignment;
+            guest.tableAssignment = null;
+            
+            updateStatus(`Unassigned ${guest.name} from ${oldTable}`);
+            renderGuests();
+            renderTables();
+        }
+        
+        // Initialize the test
+        function init() {
+            renderGuests();
+            renderTables();
+            updateStatus('Guest-table linking test ready! Try assigning/unassigning guests.');
+            
+            // Auto-demo after 2 seconds
+            setTimeout(() => {
+                updateStatus('Auto-demo: Assigning Alice Brown to a table...');
+                assignGuest('4');
+                
+                setTimeout(() => {
+                    updateStatus('Auto-demo: Viewing John Smith\'s table...');
+                    viewTable('Table 1', '1');
+                }, 2000);
+            }, 2000);
+        }
+        
+        // Start the test
+        init();
+    </script>
+</body>
+</html>

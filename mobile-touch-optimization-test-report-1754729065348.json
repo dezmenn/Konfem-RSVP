@@ -1,0 +1,414 @@
+{
+  "summary": {
+    "passed": 4,
+    "total": 7,
+    "successRate": 57.14285714285714,
+    "totalDuration": 31,
+    "timestamp": "2025-08-09T08:44:25.348Z"
+  },
+  "testResults": [
+    {
+      "name": "Touch-Optimized Components",
+      "success": false,
+      "duration": 4
+    },
+    {
+      "name": "Drag and Drop API",
+      "success": false,
+      "duration": 1
+    },
+    {
+      "name": "Touch Gesture Support",
+      "success": false,
+      "duration": 2
+    },
+    {
+      "name": "Mobile Navigation API",
+      "success": true,
+      "duration": 4
+    },
+    {
+      "name": "Touch-Friendly Data Sizes",
+      "success": true,
+      "duration": 2
+    },
+    {
+      "name": "Mobile-Specific Features",
+      "success": true,
+      "duration": 4
+    },
+    {
+      "name": "Touch Performance Optimization",
+      "success": true,
+      "duration": 3
+    }
+  ],
+  "detailedLogs": [
+    {
+      "timestamp": "2025-08-09T08:44:25.313Z",
+      "type": "info",
+      "message": "🚀 Starting Mobile Touch Optimization Testing",
+      "testTime": 1
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.314Z",
+      "type": "info",
+      "message": "Testing against: http://localhost:5000/api",
+      "testTime": 1
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.314Z",
+      "type": "info",
+      "message": "Event ID: demo-event-1",
+      "testTime": 2
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.315Z",
+      "type": "info",
+      "message": "",
+      "testTime": 3
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.316Z",
+      "type": "info",
+      "message": "\n--- Running Touch-Optimized Components ---",
+      "testTime": 3
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.316Z",
+      "type": "info",
+      "message": "=== Testing Touch-Optimized Components ===",
+      "testTime": 4
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.317Z",
+      "type": "warning",
+      "message": "⚠ Mobile endpoint not available: touch-config",
+      "testTime": 5
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.318Z",
+      "type": "warning",
+      "message": "⚠ Mobile endpoint not available: gesture-settings",
+      "testTime": 5
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.319Z",
+      "type": "warning",
+      "message": "⚠ Mobile endpoint not available: interface-config",
+      "testTime": 6
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.319Z",
+      "type": "error",
+      "message": "✗ Touch-optimized components test failed: fetch is not a function",
+      "testTime": 7
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.320Z",
+      "type": "info",
+      "message": "Touch-Optimized Components completed in 4ms: ✗ FAILED",
+      "testTime": 7
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.320Z",
+      "type": "info",
+      "message": "\n--- Running Drag and Drop API ---",
+      "testTime": 8
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.321Z",
+      "type": "info",
+      "message": "=== Testing Drag and Drop API ===",
+      "testTime": 9
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.322Z",
+      "type": "error",
+      "message": "✗ Drag and drop API test failed: fetch is not a function",
+      "testTime": 9
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.322Z",
+      "type": "info",
+      "message": "Drag and Drop API completed in 1ms: ✗ FAILED",
+      "testTime": 10
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.323Z",
+      "type": "info",
+      "message": "\n--- Running Touch Gesture Support ---",
+      "testTime": 10
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.324Z",
+      "type": "info",
+      "message": "=== Testing Touch Gesture Support ===",
+      "testTime": 11
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.324Z",
+      "type": "error",
+      "message": "✗ Touch gesture support test failed: fetch is not a function",
+      "testTime": 12
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.325Z",
+      "type": "info",
+      "message": "Touch Gesture Support completed in 2ms: ✗ FAILED",
+      "testTime": 12
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.325Z",
+      "type": "info",
+      "message": "\n--- Running Mobile Navigation API ---",
+      "testTime": 13
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.326Z",
+      "type": "info",
+      "message": "=== Testing Mobile Navigation API ===",
+      "testTime": 14
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.327Z",
+      "type": "error",
+      "message": "✗ Guest List API failed: fetch is not a function",
+      "testTime": 14
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.327Z",
+      "type": "error",
+      "message": "✗ Table Management API failed: fetch is not a function",
+      "testTime": 15
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.328Z",
+      "type": "error",
+      "message": "✗ Venue Layout API failed: fetch is not a function",
+      "testTime": 15
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.329Z",
+      "type": "error",
+      "message": "✗ Dashboard API failed: fetch is not a function",
+      "testTime": 16
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.329Z",
+      "type": "info",
+      "message": "Mobile navigation accessibility: 0.0% (0/4)",
+      "testTime": 17
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.330Z",
+      "type": "warning",
+      "message": "⚠ Mobile navigation APIs have accessibility issues",
+      "testTime": 17
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.330Z",
+      "type": "info",
+      "message": "Mobile Navigation API completed in 4ms: ✓ PASSED",
+      "testTime": 17
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.330Z",
+      "type": "info",
+      "message": "\n--- Running Touch-Friendly Data Sizes ---",
+      "testTime": 18
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.331Z",
+      "type": "info",
+      "message": "=== Testing Touch-Friendly Data Sizes ===",
+      "testTime": 19
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.332Z",
+      "type": "error",
+      "message": "✗ Guests data size test failed: fetch is not a function",
+      "testTime": 19
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.332Z",
+      "type": "error",
+      "message": "✗ Tables data size test failed: fetch is not a function",
+      "testTime": 20
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.333Z",
+      "type": "error",
+      "message": "✗ Analytics data size test failed: fetch is not a function",
+      "testTime": 20
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.333Z",
+      "type": "info",
+      "message": "Touch-Friendly Data Sizes completed in 2ms: ✓ PASSED",
+      "testTime": 21
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.334Z",
+      "type": "info",
+      "message": "\n--- Running Mobile-Specific Features ---",
+      "testTime": 21
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.335Z",
+      "type": "info",
+      "message": "=== Testing Mobile-Specific Features ===",
+      "testTime": 22
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.336Z",
+      "type": "warning",
+      "message": "⚠ Contact Integration feature test failed: fetch is not a function",
+      "testTime": 23
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.336Z",
+      "type": "warning",
+      "message": "⚠ Touch Calibration feature test failed: fetch is not a function",
+      "testTime": 24
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.337Z",
+      "type": "warning",
+      "message": "⚠ Offline Support feature test failed: fetch is not a function",
+      "testTime": 24
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.337Z",
+      "type": "info",
+      "message": "Mobile feature availability: 0.0% (0/3)",
+      "testTime": 25
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.338Z",
+      "type": "info",
+      "message": "Mobile-Specific Features completed in 4ms: ✓ PASSED",
+      "testTime": 25
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.338Z",
+      "type": "info",
+      "message": "\n--- Running Touch Performance Optimization ---",
+      "testTime": 26
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.339Z",
+      "type": "info",
+      "message": "=== Testing Touch Performance Optimization ===",
+      "testTime": 27
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.340Z",
+      "type": "error",
+      "message": "✗ Guest List Loading performance test failed: fetch is not a function",
+      "testTime": 28
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.341Z",
+      "type": "error",
+      "message": "✗ Table Assignment performance test failed: fetch is not a function",
+      "testTime": 28
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.341Z",
+      "type": "error",
+      "message": "✗ Venue Layout Update performance test failed: fetch is not a function",
+      "testTime": 29
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.342Z",
+      "type": "info",
+      "message": "Touch Performance Optimization completed in 3ms: ✓ PASSED",
+      "testTime": 29
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.342Z",
+      "type": "info",
+      "message": "\n============================================================",
+      "testTime": 30
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.343Z",
+      "type": "info",
+      "message": "📱 MOBILE TOUCH OPTIMIZATION TEST SUMMARY",
+      "testTime": 30
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.343Z",
+      "type": "info",
+      "message": "============================================================",
+      "testTime": 31
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.344Z",
+      "type": "info",
+      "message": "Tests passed: 4/7",
+      "testTime": 31
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.344Z",
+      "type": "info",
+      "message": "Total duration: 31ms",
+      "testTime": 32
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.345Z",
+      "type": "info",
+      "message": "Success rate: 57.1%",
+      "testTime": 32
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.345Z",
+      "type": "info",
+      "message": "  ✗ Touch-Optimized Components (4ms)",
+      "testTime": 32
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.345Z",
+      "type": "info",
+      "message": "  ✗ Drag and Drop API (1ms)",
+      "testTime": 33
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.346Z",
+      "type": "info",
+      "message": "  ✗ Touch Gesture Support (2ms)",
+      "testTime": 33
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.346Z",
+      "type": "info",
+      "message": "  ✓ Mobile Navigation API (4ms)",
+      "testTime": 33
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.346Z",
+      "type": "info",
+      "message": "  ✓ Touch-Friendly Data Sizes (2ms)",
+      "testTime": 34
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.347Z",
+      "type": "info",
+      "message": "  ✓ Mobile-Specific Features (4ms)",
+      "testTime": 34
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.347Z",
+      "type": "info",
+      "message": "  ✓ Touch Performance Optimization (3ms)",
+      "testTime": 34
+    },
+    {
+      "timestamp": "2025-08-09T08:44:25.347Z",
+      "type": "info",
+      "message": "\n⚠️  3 test(s) failed. Check the logs above for details.",
+      "testTime": 35
+    }
+  ]
+}

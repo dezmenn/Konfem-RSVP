@@ -1,0 +1,11 @@
+name,phoneNumber,dietaryRestrictions,additionalGuestCount,relationshipType,brideOrGroomSide,specialRequests
+John Doe,+1234567890,Vegetarian,1,Friend,bride,Needs wheelchair access
+Jane Smith,+0987654321,"Gluten-free,Vegan",0,Cousin,groom,
+Bob Johnson,+1122334455,,2,Uncle,bride,Prefers front table
+Alice Brown,+5566778899,Lactose intolerant,1,Aunt,groom,Arriving late due to flight
+Charlie Wilson,+9988776655,"Nut allergy,Vegetarian",0,Colleague,bride,
+Diana Davis,+3344556677,,3,Sibling,groom,Will help with setup
+Eve Miller,+7788990011,Kosher,1,Grandparent,bride,Needs assistance walking
+Frank Garcia,+2233445566,,0,Friend,groom,Professional photographer
+Grace Lee,+6677889900,Vegan,2,Cousin,bride,
+Henry Taylor,+4455667788,,1,Other,groom,Plus one is dietary restricted

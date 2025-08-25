@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest-Table Linking Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        .section h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .guest-list, .table-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .guest-item, .table-item {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #f9f9f9;
+        }
+        .guest-item.seated {
+            background: #e8f5e8;
+            border-color: #4CAF50;
+        }
+        .table-item.over-capacity {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+        .guest-name, .table-name {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .guest-details, .table-details {
+            font-size: 14px;
+            color: #666;
+        }
+        .button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button:hover {
+            background: #1976D2;
+        }
+        .button.primary {
+            background: #4CAF50;
+        }
+        .button.primary:hover {
+            background: #45a049;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .status.success {
+            background: #e8f5e8;
+            color: #2e7d32;
+            border: 1px solid #4caf50;
+        }
+        .status.error {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #f44336;
+        }
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            min-width: 80px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔗 Guest-Table Linking Test</h1>
+        
+        <div class="section">
+            <h2>Controls</h2>
+            <button class="button" onclick="loadData()">🔄 Refresh Data</button>
+            <button class="button primary" onclick="testAutoArrangement()">🤖 Test Auto-Arrangement</button>
+            <button class="button" onclick="testManualAssignment()">👆 Test Manual Assignment</button>
+            <button class="button" onclick="verifyConsistency()">🔍 Verify Consistency</button>
+        </div>
+
+        <div id="status"></div>
+
+        <div class="section">
+            <h2>Statistics</h2>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="totalGuests">-</div>
+                    <div class="stat-label">Total Guests</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="seatedGuests">-</div>
+                    <div class="stat-label">Seated</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="unseatedGuests">-</div>
+                    <div class="stat-label">Unseated</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="totalTables">-</div>
+                    <div class="stat-label">Tables</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Unseated Guests</h2>
+            <div id="unseatedGuestsList" class="guest-list"></div>
+        </div>
+
+        <div class="section">
+            <h2>Seated Guests</h2>
+            <div id="seatedGuestsList" class="guest-list"></div>
+        </div>
+
+        <div class="section">
+            <h2>Tables</h2>
+            <div id="tablesList" class="table-list"></div>
+        </div>
+    </div>
+
+    <script>
+        const BASE_URL = 'http://localhost:3000/api';
+        const EVENT_ID = 'demo-event-1';
+        
+        let guests = [];
+        let tables = [];
+
+        function showStatus(message, type = 'success') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `<div class="status ${type}">${message}</div>`;
+            setTimeout(() => {
+                statusDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        async function loadData() {
+            try {
+                showStatus('Loading data...', 'info');
+                
+                const [guestsResponse, tablesResponse] = await Promise.all([
+                    fetch(`${BASE_URL}/guests/events/${EVENT_ID}`),
+                    fetch(`${BASE_URL}/tables/events/${EVENT_ID}`)
+                ]);
+
+                if (!guestsResponse.ok || !tablesResponse.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+
+                guests = await guestsResponse.json();
+                tables = await tablesResponse.json();
+
+                updateDisplay();
+                showStatus(`Loaded ${guests.length} guests and ${tables.length} tables`);
+            } catch (error) {
+                showStatus(`Error loading data: ${error.message}`, 'error');
+                console.error('Error loading data:', error);
+            }
+        }
+
+        function updateDisplay() {
+            updateStats();
+            updateGuestLists();
+            updateTablesList();
+        }
+
+        function updateStats() {
+            const seatedGuests = guests.filter(g => g.tableAssignment);
+            const unseatedGuests = guests.filter(g => !g.tableAssignment);
+
+            document.getElementById('totalGuests').textContent = guests.length;
+            document.getElementById('seatedGuests').textContent = seatedGuests.length;
+            document.getElementById('unseatedGuests').textContent = unseatedGuests.length;
+            document.getElementById('totalTables').textContent = tables.length;
+        }
+
+        function updateGuestLists() {
+            const seatedGuests = guests.filter(g => g.tableAssignment);
+            const unseatedGuests = guests.filter(g => !g.tableAssignment);
+
+            // Update unseated guests
+            const unseatedList = document.getElementById('unseatedGuestsList');
+            unseatedList.innerHTML = unseatedGuests.map(guest => `
+                <div class="guest-item">
+                    <div class="guest-name">${guest.name}</div>
+                    <div class="guest-details">
+                        <div>Side: ${guest.brideOrGroomSide}</div>
+                        <div>Relationship: ${guest.relationshipType}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Update seated guests
+            const seatedList = document.getElementById('seatedGuestsList');
+            seatedList.innerHTML = seatedGuests.map(guest => {
+                const table = tables.find(t => t.id === guest.tableAssignment);
+                const tableName = table ? table.name : 'Unknown Table';
+                return `
+                    <div class="guest-item seated">
+                        <div class="guest-name">${guest.name}</div>
+                        <div class="guest-details">
+                            <div>Side: ${guest.brideOrGroomSide}</div>
+                            <div>Table: ${tableName}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateTablesList() {
+            const tablesList = document.getElementById('tablesList');
+            tablesList.innerHTML = tables.map(table => {
+                const assignedGuestIds = table.assignedGuests || [];
+                const tableGuests = guests.filter(g => assignedGuestIds.includes(g.id));
+                const isOverCapacity = assignedGuestIds.length > table.capacity;
+                
+                return `
+                    <div class="table-item ${isOverCapacity ? 'over-capacity' : ''}">
+                        <div class="table-name">${table.name} ${table.isLocked ? '🔒' : ''}</div>
+                        <div class="table-details">
+                            <div>Capacity: ${assignedGuestIds.length}/${table.capacity}</div>
+                            <div>Available: ${Math.max(0, table.capacity - assignedGuestIds.length)}</div>
+                            ${tableGuests.length > 0 ? `
+                                <div style="margin-top: 8px;">
+                                    <strong>Guests:</strong><br>
+                                    ${tableGuests.map(g => g.name).join('<br>')}
+                                </div>
+                            ` : '<div style="margin-top: 8px; color: #999;">No guests assigned</div>'}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function testAutoArrangement() {
+            try {
+                showStatus('Running auto-arrangement...', 'info');
+                
+                const response = await fetch(`${BASE_URL}/tables/events/${EVENT_ID}/auto-arrange`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        respectRelationships: true,
+                        balanceBrideGroomSides: true,
+                        keepFamiliesTogether: true,
+                        maxGuestsPerTable: 8
+                    })
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    showStatus(`Auto-arrangement successful: ${result.message}`);
+                    await loadData(); // Refresh data
+                } else {
+                    const error = await response.text();
+                    throw new Error(error);
+                }
+            } catch (error) {
+                showStatus(`Auto-arrangement failed: ${error.message}`, 'error');
+                console.error('Auto-arrangement error:', error);
+            }
+        }
+
+        async function testManualAssignment() {
+            const unseatedGuests = guests.filter(g => !g.tableAssignment);
+            const availableTables = tables.filter(t => {
+                const occupancy = (t.assignedGuests || []).length;
+                return occupancy < t.capacity && !t.isLocked;
+            });
+
+            if (unseatedGuests.length === 0) {
+                showStatus('No unseated guests available for manual assignment', 'error');
+                return;
+            }
+
+            if (availableTables.length === 0) {
+                showStatus('No available tables for manual assignment', 'error');
+                return;
+            }
+
+            try {
+                const testGuest = unseatedGuests[0];
+                const testTable = availableTables[0];
+
+                showStatus(`Assigning ${testGuest.name} to ${testTable.name}...`, 'info');
+
+                const response = await fetch(`${BASE_URL}/guests/${testGuest.id}/assign-table`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ tableId: testTable.id })
+                });
+
+                if (response.ok) {
+                    showStatus(`Successfully assigned ${testGuest.name} to ${testTable.name}`);
+                    await loadData(); // Refresh data
+                } else {
+                    const error = await response.text();
+                    throw new Error(error);
+                }
+            } catch (error) {
+                showStatus(`Manual assignment failed: ${error.message}`, 'error');
+                console.error('Manual assignment error:', error);
+            }
+        }
+
+        function verifyConsistency() {
+            let errors = [];
+
+            // Check guest-table consistency
+            guests.forEach(guest => {
+                if (guest.tableAssignment) {
+                    const assignedTable = tables.find(t => t.id === guest.tableAssignment);
+                    if (!assignedTable) {
+                        errors.push(`Guest ${guest.name} assigned to non-existent table ${guest.tableAssignment}`);
+                    } else if (!assignedTable.assignedGuests || !assignedTable.assignedGuests.includes(guest.id)) {
+                        errors.push(`Guest ${guest.name} not in table ${assignedTable.name}'s assignedGuests array`);
+                    }
+                }
+            });
+
+            // Check table-guest consistency
+            tables.forEach(table => {
+                if (table.assignedGuests) {
+                    table.assignedGuests.forEach(guestId => {
+                        const guest = guests.find(g => g.id === guestId);
+                        if (!guest) {
+                            errors.push(`Table ${table.name} references non-existent guest ${guestId}`);
+                        } else if (guest.tableAssignment !== table.id) {
+                            errors.push(`Guest ${guest.name} in table ${table.name}'s array but tableAssignment is ${guest.tableAssignment || 'null'}`);
+                        }
+                    });
+                }
+            });
+
+            if (errors.length === 0) {
+                showStatus('✅ All data is consistent!');
+            } else {
+                showStatus(`❌ Found ${errors.length} consistency errors:<br>${errors.join('<br>')}`, 'error');
+            }
+        }
+
+        // Load data on page load
+        window.addEventListener('load', loadData);
+    </script>
+</body>
+</html>

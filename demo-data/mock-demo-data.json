@@ -1,0 +1,1462 @@
+{
+  "event": {
+    "id": "demo-event-1",
+    "title": "Sarah & John's Wedding",
+    "description": "Join us for our special day filled with love, laughter, and celebration!",
+    "date": "2025-08-15T18:00:00Z",
+    "location": "Grand Ballroom, Elegant Hotel, 123 Wedding Ave, City, State",
+    "rsvpDeadline": "2025-07-15T23:59:59Z",
+    "organizerId": "demo-organizer-1",
+    "publicRSVPEnabled": true,
+    "publicRSVPLink": "http://localhost:3000/public/demo-event-1",
+    "invitationTemplate": "elegant-template-1",
+    "reminderSchedule": [
+      {
+        "id": "reminder-1",
+        "triggerDays": 14,
+        "messageTemplate": "Hi {guestName}! Just a friendly reminder about Sarah & John's wedding on August 15th. Please RSVP by July 15th: {rsvpLink}",
+        "isActive": true
+      },
+      {
+        "id": "reminder-2",
+        "triggerDays": 7,
+        "messageTemplate": "Hi {guestName}! One week left to RSVP for Sarah & John's wedding. Please respond by July 15th: {rsvpLink}",
+        "isActive": true
+      },
+      {
+        "id": "reminder-3",
+        "triggerDays": 3,
+        "messageTemplate": "Hi {guestName}! Final reminder - please RSVP for Sarah & John's wedding by July 15th: {rsvpLink}",
+        "isActive": true
+      }
+    ]
+  },
+  "invitationTemplates": [
+    {
+      "id": "light-elegance-1",
+      "name": "Light Elegance",
+      "eventId": "demo-event-1",
+      "backgroundColor": "#f8f9fa",
+      "width": 600,
+      "height": 800,
+      "textElements": [
+        {
+          "id": "title",
+          "type": "title",
+          "content": "You're Invited!",
+          "position": {
+            "x": 50,
+            "y": 80
+          },
+          "fontSize": 32,
+          "fontFamily": "Georgia, serif",
+          "color": "#2c3e50",
+          "fontWeight": "bold",
+          "textAlign": "center",
+          "width": 500,
+          "height": 50
+        },
+        {
+          "id": "event-name",
+          "type": "subtitle",
+          "content": "{{eventTitle}}",
+          "position": {
+            "x": 50,
+            "y": 150
+          },
+          "fontSize": 24,
+          "fontFamily": "Georgia, serif",
+          "color": "#34495e",
+          "fontWeight": "600",
+          "textAlign": "center",
+          "width": 500,
+          "height": 40
+        },
+        {
+          "id": "date",
+          "type": "date",
+          "content": "{{eventDate}} at {{eventTime}}",
+          "position": {
+            "x": 50,
+            "y": 220
+          },
+          "fontSize": 18,
+          "fontFamily": "Arial, sans-serif",
+          "color": "#7f8c8d",
+          "fontWeight": "normal",
+          "textAlign": "center",
+          "width": 500,
+          "height": 30
+        },
+        {
+          "id": "location",
+          "type": "location",
+          "content": "{{eventLocation}}",
+          "position": {
+            "x": 50,
+            "y": 270
+          },
+          "fontSize": 16,
+          "fontFamily": "Arial, sans-serif",
+          "color": "#7f8c8d",
+          "fontWeight": "normal",
+          "textAlign": "center",
+          "width": 500,
+          "height": 30
+        },
+        {
+          "id": "message",
+          "type": "body",
+          "content": "We would be honored to have you join us for this special celebration. Your presence would make our day even more meaningful.",
+          "position": {
+            "x": 50,
+            "y": 350
+          },
+          "fontSize": 16,
+          "fontFamily": "Arial, sans-serif",
+          "color": "#2c3e50",
+          "fontWeight": "normal",
+          "textAlign": "center",
+          "width": 500,
+          "height": 80
+        },
+        {
+          "id": "rsvp",
+          "type": "rsvp",
+          "content": "Please RSVP by {{rsvpDeadline}}",
+          "position": {
+            "x": 50,
+            "y": 500
+          },
+          "fontSize": 14,
+          "fontFamily": "Arial, sans-serif",
+          "color": "#e74c3c",
+          "fontWeight": "bold",
+          "textAlign": "center",
+          "width": 500,
+          "height": 30
+        }
+      ],
+      "imageElements": [],
+      "isDefault": true,
+      "createdAt": "2025-01-01T00:00:00Z",
+      "updatedAt": "2025-01-01T00:00:00Z"
+    },
+    {
+      "id": "dark-sophistication-1",
+      "name": "Dark Sophistication",
+      "eventId": "demo-event-1",
+      "backgroundColor": "#2c3e50",
+      "width": 600,
+      "height": 800,
+      "textElements": [
+        {
+          "id": "title",
+          "type": "title",
+          "content": "You're Invited!",
+          "position": {
+            "x": 50,
+            "y": 80
+          },
+          "fontSize": 32,
+          "fontFamily": "Playfair Display, serif",
+          "color": "#ecf0f1",
+          "fontWeight": "bold",
+          "textAlign": "center",
+          "width": 500,
+          "height": 50
+        },
+        {
+          "id": "event-name",
+          "type": "subtitle",
+          "content": "{{eventTitle}}",
+          "position": {
+            "x": 50,
+            "y": 150
+          },
+          "fontSize": 24,
+          "fontFamily": "Playfair Display, serif",
+          "color": "#bdc3c7",
+          "fontWeight": "600",
+          "textAlign": "center",
+          "width": 500,
+          "height": 40
+        },
+        {
+          "id": "date",
+          "type": "date",
+          "content": "{{eventDate}} at {{eventTime}}",
+          "position": {
+            "x": 50,
+            "y": 220
+          },
+          "fontSize": 18,
+          "fontFamily": "Lato, sans-serif",
+          "color": "#95a5a6",
+          "fontWeight": "normal",
+          "textAlign": "center",
+          "width": 500,
+          "height": 30
+        },
+        {
+          "id": "location",
+          "type": "location",
+          "content": "{{eventLocation}}",
+          "position": {
+            "x": 50,
+            "y": 270
+          },
+          "fontSize": 16,
+          "fontFamily": "Lato, sans-serif",
+          "color": "#95a5a6",
+          "fontWeight": "normal",
+          "textAlign": "center",
+          "width": 500,
+          "height": 30
+        },
+        {
+          "id": "message",
+          "type": "body",
+          "content": "Join us for an evening of elegance and celebration. Your presence will add to the magic of this special moment.",
+          "position": {
+            "x": 50,
+            "y": 350
+          },
+          "fontSize": 16,
+          "fontFamily": "Lato, sans-serif",
+          "color": "#ecf0f1",
+          "fontWeight": "normal",
+          "textAlign": "center",
+          "width": 500,
+          "height": 80
+        },
+        {
+          "id": "rsvp",
+          "type": "rsvp",
+          "content": "Please RSVP by {{rsvpDeadline}}",
+          "position": {
+            "x": 50,
+            "y": 500
+          },
+          "fontSize": 14,
+          "fontFamily": "Lato, sans-serif",
+          "color": "#f39c12",
+          "fontWeight": "bold",
+          "textAlign": "center",
+          "width": 500,
+          "height": 30
+        }
+      ],
+      "imageElements": [],
+      "isDefault": false,
+      "createdAt": "2025-01-01T00:00:00Z",
+      "updatedAt": "2025-01-01T00:00:00Z"
+    },
+    {
+      "id": "vibrant-celebration-1",
+      "name": "Vibrant Celebration",
+      "eventId": "demo-event-1",
+      "backgroundColor": "#fff5f5",
+      "width": 600,
+      "height": 800,
+      "textElements": [
+        {
+          "id": "title",
+          "type": "title",
+          "content": "You're Invited!",
+          "position": {
+            "x": 50,
+            "y": 80
+          },
+          "fontSize": 32,
+          "fontFamily": "Montserrat, sans-serif",
+          "color": "#e91e63",
+          "fontWeight": "bold",
+          "textAlign": "center",
+          "width": 500,
+          "height": 50
+        },
+        {
+          "id": "event-name",
+          "type": "subtitle",
+          "content": "{{eventTitle}}",
+          "position": {
+            "x": 50,
+            "y": 150
+          },
+          "fontSize": 24,
+          "fontFamily": "Montserrat, sans-serif",
+          "color": "#9c27b0",
+          "fontWeight": "600",
+          "textAlign": "center",
+          "width": 500,
+          "height": 40
+        },
+        {
+          "id": "date",
+          "type": "date",
+          "content": "{{eventDate}} at {{eventTime}}",
+          "position": {
+            "x": 50,
+            "y": 220
+          },
+          "fontSize": 18,
+          "fontFamily": "Open Sans, sans-serif",
+          "color": "#ff5722",
+          "fontWeight": "normal",
+          "textAlign": "center",
+          "width": 500,
+          "height": 30
+        },
+        {
+          "id": "location",
+          "type": "location",
+          "content": "{{eventLocation}}",
+          "position": {
+            "x": 50,
+            "y": 270
+          },
+          "fontSize": 16,
+          "fontFamily": "Open Sans, sans-serif",
+          "color": "#ff9800",
+          "fontWeight": "normal",
+          "textAlign": "center",
+          "width": 500,
+          "height": 30
+        },
+        {
+          "id": "message",
+          "type": "body",
+          "content": "Come celebrate with us! It's going to be a day filled with joy, laughter, and unforgettable memories.",
+          "position": {
+            "x": 50,
+            "y": 350
+          },
+          "fontSize": 16,
+          "fontFamily": "Open Sans, sans-serif",
+          "color": "#673ab7",
+          "fontWeight": "normal",
+          "textAlign": "center",
+          "width": 500,
+          "height": 80
+        },
+        {
+          "id": "rsvp",
+          "type": "rsvp",
+          "content": "Please RSVP by {{rsvpDeadline}}",
+          "position": {
+            "x": 50,
+            "y": 500
+          },
+          "fontSize": 14,
+          "fontFamily": "Open Sans, sans-serif",
+          "color": "#4caf50",
+          "fontWeight": "bold",
+          "textAlign": "center",
+          "width": 500,
+          "height": 30
+        }
+      ],
+      "imageElements": [],
+      "isDefault": false,
+      "createdAt": "2025-01-01T00:00:00Z",
+      "updatedAt": "2025-01-01T00:00:00Z"
+    }
+  ],
+  "guests": [
+    {
+      "id": "bride-1",
+      "eventId": "demo-event-1",
+      "name": "Sarah Williams",
+      "phoneNumber": "60123456700",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 0,
+      "relationshipType": "Bride",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "VIP table",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:00:00Z",
+      "updatedAt": "2025-07-01T09:00:00Z"
+    },
+    {
+      "id": "groom-1",
+      "eventId": "demo-event-1",
+      "name": "John Thompson",
+      "phoneNumber": "60123456701",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 0,
+      "relationshipType": "Groom",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "accepted",
+      "specialRequests": "VIP table",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:00:00Z",
+      "updatedAt": "2025-07-01T09:00:00Z"
+    },
+    {
+      "id": "bride-parent-1",
+      "eventId": "demo-event-1",
+      "name": "Robert Williams",
+      "phoneNumber": "60123456702",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 1,
+      "relationshipType": "Parent",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Father of the bride",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:05:00Z",
+      "updatedAt": "2025-07-01T09:05:00Z"
+    },
+    {
+      "id": "bride-parent-2",
+      "eventId": "demo-event-1",
+      "name": "Linda Williams",
+      "phoneNumber": "60123456703",
+      "dietaryRestrictions": [
+        "Vegetarian"
+      ],
+      "additionalGuestCount": 0,
+      "relationshipType": "Parent",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Mother of the bride",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:05:00Z",
+      "updatedAt": "2025-07-01T09:05:00Z"
+    },
+    {
+      "id": "groom-parent-1",
+      "eventId": "demo-event-1",
+      "name": "Michael Thompson",
+      "phoneNumber": "60123456704",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 1,
+      "relationshipType": "Parent",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Father of the groom",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:05:00Z",
+      "updatedAt": "2025-07-01T09:05:00Z"
+    },
+    {
+      "id": "groom-parent-2",
+      "eventId": "demo-event-1",
+      "name": "Patricia Thompson",
+      "phoneNumber": "60123456705",
+      "dietaryRestrictions": [
+        "Gluten-free"
+      ],
+      "additionalGuestCount": 0,
+      "relationshipType": "Parent",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Mother of the groom",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:05:00Z",
+      "updatedAt": "2025-07-01T09:05:00Z"
+    },
+    {
+      "id": "bride-sibling-1",
+      "eventId": "demo-event-1",
+      "name": "David Williams",
+      "phoneNumber": "60123456706",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 2,
+      "relationshipType": "Sibling",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Brother of the bride",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:10:00Z",
+      "updatedAt": "2025-07-01T09:10:00Z"
+    },
+    {
+      "id": "bride-sibling-2",
+      "eventId": "demo-event-1",
+      "name": "Emily Williams",
+      "phoneNumber": "60123456707",
+      "dietaryRestrictions": [
+        "Lactose-free"
+      ],
+      "additionalGuestCount": 1,
+      "relationshipType": "Sibling",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Sister of the bride",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:10:00Z",
+      "updatedAt": "2025-07-01T09:10:00Z"
+    },
+    {
+      "id": "groom-sibling-1",
+      "eventId": "demo-event-1",
+      "name": "Daniel Thompson",
+      "phoneNumber": "60123456708",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 3,
+      "relationshipType": "Sibling",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Brother of the groom",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:10:00Z",
+      "updatedAt": "2025-07-01T09:10:00Z"
+    },
+    {
+      "id": "bride-grandparent-1",
+      "eventId": "demo-event-1",
+      "name": "George Williams",
+      "phoneNumber": "60123456709",
+      "dietaryRestrictions": [
+        "Soft foods"
+      ],
+      "additionalGuestCount": 1,
+      "relationshipType": "Grandparent",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Wheelchair accessible, close to restrooms",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:15:00Z",
+      "updatedAt": "2025-07-01T09:15:00Z"
+    },
+    {
+      "id": "bride-grandparent-2",
+      "eventId": "demo-event-1",
+      "name": "Margaret Williams",
+      "phoneNumber": "60123456710",
+      "dietaryRestrictions": [
+        "Diabetic-friendly"
+      ],
+      "additionalGuestCount": 0,
+      "relationshipType": "Grandparent",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Quiet seating preferred",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:15:00Z",
+      "updatedAt": "2025-07-01T09:15:00Z"
+    },
+    {
+      "id": "groom-grandparent-1",
+      "eventId": "demo-event-1",
+      "name": "William Thompson",
+      "phoneNumber": "60123456711",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 1,
+      "relationshipType": "Grandparent",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Close to family table",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:15:00Z",
+      "updatedAt": "2025-07-01T09:15:00Z"
+    },
+    {
+      "id": "bride-granduncle-1",
+      "eventId": "demo-event-1",
+      "name": "Charles Williams",
+      "phoneNumber": "60123456712",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 1,
+      "relationshipType": "Granduncle",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Enjoys storytelling",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:20:00Z",
+      "updatedAt": "2025-07-01T09:20:00Z"
+    },
+    {
+      "id": "bride-grandaunt-1",
+      "eventId": "demo-event-1",
+      "name": "Dorothy Williams",
+      "phoneNumber": "60123456713",
+      "dietaryRestrictions": [
+        "Vegetarian"
+      ],
+      "additionalGuestCount": 0,
+      "relationshipType": "Grandaunt",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Loves dancing",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:20:00Z",
+      "updatedAt": "2025-07-01T09:20:00Z"
+    },
+    {
+      "id": "groom-granduncle-1",
+      "eventId": "demo-event-1",
+      "name": "Frank Thompson",
+      "phoneNumber": "60123456714",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 1,
+      "relationshipType": "Granduncle",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Veteran, prefers quiet area",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:20:00Z",
+      "updatedAt": "2025-07-01T09:20:00Z"
+    },
+    {
+      "id": "bride-uncle-1",
+      "eventId": "demo-event-1",
+      "name": "Michael Williams",
+      "phoneNumber": "60123456715",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 1,
+      "relationshipType": "Uncle",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Photographer, needs good view",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:25:00Z",
+      "updatedAt": "2025-07-01T09:25:00Z"
+    },
+    {
+      "id": "bride-aunt-1",
+      "eventId": "demo-event-1",
+      "name": "Susan Williams",
+      "phoneNumber": "60123456716",
+      "dietaryRestrictions": [
+        "Gluten-free"
+      ],
+      "additionalGuestCount": 0,
+      "relationshipType": "Aunt",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Event coordinator, may need to move around",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:25:00Z",
+      "updatedAt": "2025-07-01T09:25:00Z"
+    },
+    {
+      "id": "groom-uncle-1",
+      "eventId": "demo-event-1",
+      "name": "James Thompson",
+      "phoneNumber": "60123456717",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 1,
+      "relationshipType": "Uncle",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Best man's speech coordinator",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:25:00Z",
+      "updatedAt": "2025-07-01T09:25:00Z"
+    },
+    {
+      "id": "groom-aunt-1",
+      "eventId": "demo-event-1",
+      "name": "Carol Thompson",
+      "phoneNumber": "60123456718",
+      "dietaryRestrictions": [
+        "Vegan"
+      ],
+      "additionalGuestCount": 0,
+      "relationshipType": "Aunt",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Loves to dance",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:25:00Z",
+      "updatedAt": "2025-07-01T09:25:00Z"
+    },
+    {
+      "id": "bride-cousin-1",
+      "eventId": "demo-event-1",
+      "name": "Jessica Williams",
+      "phoneNumber": "60123456719",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 2,
+      "relationshipType": "Cousin",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Young children, needs high chairs",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:30:00Z",
+      "updatedAt": "2025-07-01T09:30:00Z"
+    },
+    {
+      "id": "bride-cousin-2",
+      "eventId": "demo-event-1",
+      "name": "Mark Williams",
+      "phoneNumber": "60123456720",
+      "dietaryRestrictions": [
+        "Nut allergy"
+      ],
+      "additionalGuestCount": 1,
+      "relationshipType": "Cousin",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Severe nut allergy - EpiPen required",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:30:00Z",
+      "updatedAt": "2025-07-01T09:30:00Z"
+    },
+    {
+      "id": "groom-cousin-1",
+      "eventId": "demo-event-1",
+      "name": "Lisa Thompson",
+      "phoneNumber": "60123456721",
+      "dietaryRestrictions": [
+        "Vegetarian"
+      ],
+      "additionalGuestCount": 0,
+      "relationshipType": "Cousin",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Maid of honor's assistant",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:30:00Z",
+      "updatedAt": "2025-07-01T09:30:00Z"
+    },
+    {
+      "id": "groom-cousin-2",
+      "eventId": "demo-event-1",
+      "name": "Robert Thompson",
+      "phoneNumber": "60123456722",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 1,
+      "relationshipType": "Cousin",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Groomsman",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:30:00Z",
+      "updatedAt": "2025-07-01T09:30:00Z"
+    },
+    {
+      "id": "bride-colleague-1",
+      "eventId": "demo-event-1",
+      "name": "Amanda Johnson",
+      "phoneNumber": "60123456723",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 0,
+      "relationshipType": "Colleague",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Work supervisor",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:35:00Z",
+      "updatedAt": "2025-07-01T09:35:00Z"
+    },
+    {
+      "id": "bride-colleague-2",
+      "eventId": "demo-event-1",
+      "name": "Kevin Martinez",
+      "phoneNumber": "60123456724",
+      "dietaryRestrictions": [
+        "Lactose-free"
+      ],
+      "additionalGuestCount": 1,
+      "relationshipType": "Colleague",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Team lead",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:35:00Z",
+      "updatedAt": "2025-07-01T09:35:00Z"
+    },
+    {
+      "id": "groom-colleague-1",
+      "eventId": "demo-event-1",
+      "name": "Thomas Anderson",
+      "phoneNumber": "60123456725",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 0,
+      "relationshipType": "Colleague",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Business partner",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:35:00Z",
+      "updatedAt": "2025-07-01T09:35:00Z"
+    },
+    {
+      "id": "groom-colleague-2",
+      "eventId": "demo-event-1",
+      "name": "Michael Davis",
+      "phoneNumber": "60123456726",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 1,
+      "relationshipType": "Colleague",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Former boss",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:35:00Z",
+      "updatedAt": "2025-07-01T09:35:00Z"
+    },
+    {
+      "id": "bride-friend-1",
+      "eventId": "demo-event-1",
+      "name": "Jennifer Martinez",
+      "phoneNumber": "60123456727",
+      "dietaryRestrictions": [
+        "Vegetarian",
+        "Gluten-free"
+      ],
+      "additionalGuestCount": 1,
+      "relationshipType": "Friend",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Maid of honor",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:40:00Z",
+      "updatedAt": "2025-07-01T09:40:00Z"
+    },
+    {
+      "id": "bride-friend-2",
+      "eventId": "demo-event-1",
+      "name": "Sarah Johnson",
+      "phoneNumber": "60123456728",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 0,
+      "relationshipType": "Friend",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "College roommate",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:40:00Z",
+      "updatedAt": "2025-07-01T09:40:00Z"
+    },
+    {
+      "id": "bride-friend-3",
+      "eventId": "demo-event-1",
+      "name": "Emily Davis",
+      "phoneNumber": "60123456729",
+      "dietaryRestrictions": [
+        "Gluten-free"
+      ],
+      "additionalGuestCount": 0,
+      "relationshipType": "Friend",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Bridesmaid",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:40:00Z",
+      "updatedAt": "2025-07-01T09:40:00Z"
+    },
+    {
+      "id": "groom-friend-1",
+      "eventId": "demo-event-1",
+      "name": "Christopher Lee",
+      "phoneNumber": "60123456730",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 0,
+      "relationshipType": "Friend",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Best man",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:40:00Z",
+      "updatedAt": "2025-07-01T09:40:00Z"
+    },
+    {
+      "id": "groom-friend-2",
+      "eventId": "demo-event-1",
+      "name": "Robert Wilson",
+      "phoneNumber": "60123456731",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 1,
+      "relationshipType": "Friend",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "accepted",
+      "specialRequests": "College buddy",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:40:00Z",
+      "updatedAt": "2025-07-01T09:40:00Z"
+    },
+    {
+      "id": "groom-friend-3",
+      "eventId": "demo-event-1",
+      "name": "David Brown",
+      "phoneNumber": "60123456732",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 2,
+      "relationshipType": "Friend",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Groomsman",
+      "tableAssignment": null,
+      "createdAt": "2025-07-01T09:40:00Z",
+      "updatedAt": "2025-07-01T09:40:00Z"
+    }
+  ],
+  "tables": [
+    {
+      "id": "table-1",
+      "eventId": "demo-event-1",
+      "name": "Table 1 - VIP",
+      "capacity": 10,
+      "position": {
+        "x": 200,
+        "y": 150
+      },
+      "isLocked": false,
+      "assignedGuests": [],
+      "createdAt": "2025-07-01T12:00:00Z",
+      "updatedAt": "2025-07-01T12:00:00Z"
+    },
+    {
+      "id": "table-2",
+      "eventId": "demo-event-1",
+      "name": "Table 2 - Immediate Family",
+      "capacity": 8,
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "isLocked": false,
+      "assignedGuests": [],
+      "createdAt": "2025-07-01T12:05:00Z",
+      "updatedAt": "2025-07-01T12:05:00Z"
+    },
+    {
+      "id": "table-3",
+      "eventId": "demo-event-1",
+      "name": "Table 3 - Immediate Family",
+      "capacity": 8,
+      "position": {
+        "x": 300,
+        "y": 200
+      },
+      "isLocked": false,
+      "assignedGuests": [],
+      "createdAt": "2025-07-01T12:10:00Z",
+      "updatedAt": "2025-07-01T12:10:00Z"
+    },
+    {
+      "id": "table-4",
+      "eventId": "demo-event-1",
+      "name": "Table 4 - Extended Family",
+      "capacity": 10,
+      "position": {
+        "x": 50,
+        "y": 300
+      },
+      "isLocked": false,
+      "assignedGuests": [],
+      "createdAt": "2025-07-01T12:15:00Z",
+      "updatedAt": "2025-07-02T14:20:00Z"
+    },
+    {
+      "id": "table-5",
+      "eventId": "demo-event-1",
+      "name": "Table 5 - Extended Family",
+      "capacity": 10,
+      "position": {
+        "x": 200,
+        "y": 300
+      },
+      "isLocked": false,
+      "assignedGuests": [],
+      "createdAt": "2025-07-01T12:20:00Z",
+      "updatedAt": "2025-07-01T12:20:00Z"
+    },
+    {
+      "id": "table-6",
+      "eventId": "demo-event-1",
+      "name": "Table 6 - Extended Family",
+      "capacity": 10,
+      "position": {
+        "x": 350,
+        "y": 300
+      },
+      "isLocked": false,
+      "assignedGuests": [],
+      "createdAt": "2025-07-01T12:25:00Z",
+      "updatedAt": "2025-07-01T12:25:00Z"
+    },
+    {
+      "id": "table-7",
+      "eventId": "demo-event-1",
+      "name": "Table 7 - Friends",
+      "capacity": 8,
+      "position": {
+        "x": 100,
+        "y": 400
+      },
+      "isLocked": false,
+      "assignedGuests": [],
+      "createdAt": "2025-07-01T12:30:00Z",
+      "updatedAt": "2025-07-01T12:30:00Z"
+    },
+    {
+      "id": "table-8",
+      "eventId": "demo-event-1",
+      "name": "Table 8 - Friends",
+      "capacity": 8,
+      "position": {
+        "x": 300,
+        "y": 400
+      },
+      "isLocked": false,
+      "assignedGuests": [],
+      "createdAt": "2025-07-01T12:35:00Z",
+      "updatedAt": "2025-07-01T12:35:00Z"
+    },
+    {
+      "id": "table-9",
+      "eventId": "demo-event-1",
+      "name": "Table 9 - Colleagues",
+      "capacity": 6,
+      "position": {
+        "x": 450,
+        "y": 400
+      },
+      "isLocked": false,
+      "assignedGuests": [],
+      "createdAt": "2025-07-01T12:40:00Z",
+      "updatedAt": "2025-07-01T12:40:00Z"
+    },
+    {
+      "id": "table-10",
+      "eventId": "demo-event-1",
+      "name": "Table 10 - Colleagues",
+      "capacity": 6,
+      "position": {
+        "x": 450,
+        "y": 300
+      },
+      "isLocked": false,
+      "assignedGuests": [],
+      "createdAt": "2025-07-01T12:45:00Z",
+      "updatedAt": "2025-07-01T12:45:00Z"
+    }
+  ],
+  "venueElements": [
+    {
+      "id": "venue-1",
+      "eventId": "demo-event-1",
+      "type": "stage",
+      "name": "Main Stage",
+      "position": {
+        "x": 200,
+        "y": 50
+      },
+      "dimensions": {
+        "width": 150,
+        "height": 100
+      },
+      "color": "#8B4513",
+      "createdAt": "2025-07-01T12:30:00Z",
+      "updatedAt": "2025-07-01T12:30:00Z"
+    },
+    {
+      "id": "venue-2",
+      "eventId": "demo-event-1",
+      "type": "dance_floor",
+      "name": "Dance Floor",
+      "position": {
+        "x": 180,
+        "y": 200
+      },
+      "dimensions": {
+        "width": 190,
+        "height": 150
+      },
+      "color": "#FFD700",
+      "createdAt": "2025-07-01T12:35:00Z",
+      "updatedAt": "2025-07-01T12:35:00Z"
+    },
+    {
+      "id": "venue-3",
+      "eventId": "demo-event-1",
+      "type": "bar",
+      "name": "Main Bar",
+      "position": {
+        "x": 50,
+        "y": 50
+      },
+      "dimensions": {
+        "width": 100,
+        "height": 50
+      },
+      "color": "#4169E1",
+      "createdAt": "2025-07-01T12:40:00Z",
+      "updatedAt": "2025-07-01T12:40:00Z"
+    },
+    {
+      "id": "venue-4",
+      "eventId": "demo-event-1",
+      "type": "entrance",
+      "name": "Main Entrance",
+      "position": {
+        "x": 250,
+        "y": 450
+      },
+      "dimensions": {
+        "width": 80,
+        "height": 30
+      },
+      "color": "#32CD32",
+      "createdAt": "2025-07-01T12:45:00Z",
+      "updatedAt": "2025-07-01T12:45:00Z"
+    }
+  ],
+  "rsvpTokens": [
+    {
+      "id": "token-guest-1",
+      "guestId": "guest-1",
+      "eventId": "demo-event-1",
+      "token": "rsvp-token-michael-johnson-abc123",
+      "isUsed": true,
+      "expiresAt": "2025-07-15T23:59:59Z",
+      "createdAt": "2025-07-01T10:00:00Z",
+      "usedAt": "2025-07-05T14:30:00Z"
+    },
+    {
+      "id": "token-guest-2",
+      "guestId": "guest-2",
+      "eventId": "demo-event-1",
+      "token": "rsvp-token-emily-davis-def456",
+      "isUsed": false,
+      "expiresAt": "2025-07-15T23:59:59Z",
+      "createdAt": "2025-07-01T10:15:00Z",
+      "usedAt": null
+    },
+    {
+      "id": "token-guest-3",
+      "guestId": "guest-3",
+      "eventId": "demo-event-1",
+      "token": "rsvp-token-robert-wilson-ghi789",
+      "isUsed": true,
+      "expiresAt": "2025-07-15T23:59:59Z",
+      "createdAt": "2025-07-01T10:30:00Z",
+      "usedAt": "2025-07-03T16:45:00Z"
+    },
+    {
+      "id": "token-guest-4",
+      "guestId": "guest-4",
+      "eventId": "demo-event-1",
+      "token": "rsvp-token-lisa-anderson-jkl012",
+      "isUsed": true,
+      "expiresAt": "2025-07-15T23:59:59Z",
+      "createdAt": "2025-07-01T11:00:00Z",
+      "usedAt": "2025-07-04T09:20:00Z"
+    },
+    {
+      "id": "token-guest-5",
+      "guestId": "guest-5",
+      "eventId": "demo-event-1",
+      "token": "rsvp-token-david-brown-mno345",
+      "isUsed": false,
+      "expiresAt": "2025-07-15T23:59:59Z",
+      "createdAt": "2025-07-01T11:30:00Z",
+      "usedAt": null
+    },
+    {
+      "id": "token-guest-6",
+      "guestId": "guest-6",
+      "eventId": "demo-event-1",
+      "token": "rsvp-token-jennifer-martinez-pqr678",
+      "isUsed": false,
+      "expiresAt": "2025-07-15T23:59:59Z",
+      "createdAt": "2025-07-01T12:00:00Z",
+      "usedAt": null
+    },
+    {
+      "id": "token-guest-7",
+      "guestId": "guest-7",
+      "eventId": "demo-event-1",
+      "token": "rsvp-token-thomas-anderson-stu901",
+      "isUsed": false,
+      "expiresAt": "2025-07-15T23:59:59Z",
+      "createdAt": "2025-07-01T12:15:00Z",
+      "usedAt": null
+    },
+    {
+      "id": "token-guest-8",
+      "guestId": "guest-8",
+      "eventId": "demo-event-1",
+      "token": "rsvp-token-maria-rodriguez-vwx234",
+      "isUsed": true,
+      "expiresAt": "2025-07-15T23:59:59Z",
+      "createdAt": "2025-07-01T12:30:00Z",
+      "usedAt": "2025-07-05T10:20:00Z"
+    },
+    {
+      "id": "token-guest-9",
+      "guestId": "guest-9",
+      "eventId": "demo-event-1",
+      "token": "rsvp-token-james-wilson-yza567",
+      "isUsed": true,
+      "expiresAt": "2025-07-15T23:59:59Z",
+      "createdAt": "2025-07-01T12:45:00Z",
+      "usedAt": "2025-07-04T16:10:00Z"
+    },
+    {
+      "id": "token-guest-10",
+      "guestId": "guest-10",
+      "eventId": "demo-event-1",
+      "token": "rsvp-token-sarah-thompson-bcd890",
+      "isUsed": true,
+      "expiresAt": "2025-07-15T23:59:59Z",
+      "createdAt": "2025-07-01T13:00:00Z",
+      "usedAt": "2025-07-06T11:45:00Z"
+    },
+    {
+      "id": "token-guest-11",
+      "guestId": "guest-11",
+      "eventId": "demo-event-1",
+      "token": "rsvp-token-daniel-kim-efg123",
+      "isUsed": false,
+      "expiresAt": "2025-07-15T23:59:59Z",
+      "createdAt": "2025-07-01T13:15:00Z",
+      "usedAt": null
+    },
+    {
+      "id": "token-guest-12",
+      "guestId": "guest-12",
+      "eventId": "demo-event-1",
+      "token": "rsvp-token-amanda-johnson-hij456",
+      "isUsed": false,
+      "expiresAt": "2025-07-15T23:59:59Z",
+      "createdAt": "2025-07-01T13:30:00Z",
+      "usedAt": null
+    },
+    {
+      "id": "token-guest-13",
+      "guestId": "guest-13",
+      "eventId": "demo-event-1",
+      "token": "rsvp-token-christopher-lee-klm789",
+      "isUsed": true,
+      "expiresAt": "2025-07-15T23:59:59Z",
+      "createdAt": "2025-07-01T13:45:00Z",
+      "usedAt": "2025-07-05T09:30:00Z"
+    },
+    {
+      "id": "token-guest-14",
+      "guestId": "guest-14",
+      "eventId": "demo-event-1",
+      "token": "rsvp-token-jessica-brown-nop012",
+      "isUsed": false,
+      "expiresAt": "2025-07-15T23:59:59Z",
+      "createdAt": "2025-07-01T14:00:00Z",
+      "usedAt": null
+    },
+    {
+      "id": "token-guest-15",
+      "guestId": "guest-15",
+      "eventId": "demo-event-1",
+      "token": "rsvp-token-michael-davis-qrs345",
+      "isUsed": false,
+      "expiresAt": "2025-07-15T23:59:59Z",
+      "createdAt": "2025-07-01T14:15:00Z",
+      "usedAt": null
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg-1",
+      "eventId": "demo-event-1",
+      "recipientId": "guest-1",
+      "recipientName": "Michael Johnson",
+      "recipientPhone": "60123456789",
+      "content": "Hi Michael! You're invited to Sarah & John's Wedding on August 15th at Grand Ballroom, Elegant Hotel. Please RSVP by July 15th: http://localhost:3000/rsvp/rsvp-token-michael-johnson-abc123",
+      "messageType": "invitation",
+      "deliveryStatus": "delivered",
+      "scheduledAt": "2025-07-01T10:00:00Z",
+      "sentAt": "2025-07-01T10:00:30Z",
+      "deliveredAt": "2025-07-01T10:01:15Z",
+      "templateId": "elegant-template-1",
+      "createdAt": "2025-07-01T10:00:00Z",
+      "updatedAt": "2025-07-01T10:01:15Z"
+    },
+    {
+      "id": "msg-2",
+      "eventId": "demo-event-1",
+      "recipientId": "guest-2",
+      "recipientName": "Emily Davis",
+      "recipientPhone": "60123456790",
+      "content": "Hi Emily! You're invited to Sarah & John's Wedding on August 15th at Grand Ballroom, Elegant Hotel. Please RSVP by July 15th: http://localhost:3000/rsvp/rsvp-token-emily-davis-def456",
+      "messageType": "invitation",
+      "deliveryStatus": "delivered",
+      "scheduledAt": "2025-07-01T10:15:00Z",
+      "sentAt": "2025-07-01T10:15:30Z",
+      "deliveredAt": "2025-07-01T10:16:20Z",
+      "templateId": "elegant-template-1",
+      "createdAt": "2025-07-01T10:15:00Z",
+      "updatedAt": "2025-07-01T10:16:20Z"
+    },
+    {
+      "id": "msg-3",
+      "eventId": "demo-event-1",
+      "recipientId": "guest-3",
+      "recipientName": "Robert Wilson",
+      "recipientPhone": "60123456791",
+      "content": "Hi Robert! You're invited to Sarah & John's Wedding on August 15th at Grand Ballroom, Elegant Hotel. Please RSVP by July 15th: http://localhost:3000/rsvp/rsvp-token-robert-wilson-ghi789",
+      "messageType": "invitation",
+      "deliveryStatus": "delivered",
+      "scheduledAt": "2025-07-01T10:30:00Z",
+      "sentAt": "2025-07-01T10:30:45Z",
+      "deliveredAt": "2025-07-01T10:31:30Z",
+      "templateId": "elegant-template-1",
+      "createdAt": "2025-07-01T10:30:00Z",
+      "updatedAt": "2025-07-01T10:31:30Z"
+    },
+    {
+      "id": "msg-4",
+      "eventId": "demo-event-1",
+      "recipientId": "guest-4",
+      "recipientName": "Lisa Anderson",
+      "recipientPhone": "60123456792",
+      "content": "Hi Lisa! You're invited to Sarah & John's Wedding on August 15th at Grand Ballroom, Elegant Hotel. Please RSVP by July 15th: http://localhost:3000/rsvp/rsvp-token-lisa-anderson-jkl012",
+      "messageType": "invitation",
+      "deliveryStatus": "delivered",
+      "scheduledAt": "2025-07-01T11:00:00Z",
+      "sentAt": "2025-07-01T11:00:25Z",
+      "deliveredAt": "2025-07-01T11:01:10Z",
+      "templateId": "elegant-template-1",
+      "createdAt": "2025-07-01T11:00:00Z",
+      "updatedAt": "2025-07-01T11:01:10Z"
+    },
+    {
+      "id": "msg-5",
+      "eventId": "demo-event-1",
+      "recipientId": "guest-5",
+      "recipientName": "David Brown",
+      "recipientPhone": "60123456793",
+      "content": "Hi David! You're invited to Sarah & John's Wedding on August 15th at Grand Ballroom, Elegant Hotel. Please RSVP by July 15th: http://localhost:3000/rsvp/rsvp-token-david-brown-mno345",
+      "messageType": "invitation",
+      "deliveryStatus": "failed",
+      "scheduledAt": "2025-07-01T11:30:00Z",
+      "sentAt": "2025-07-01T11:30:30Z",
+      "deliveredAt": null,
+      "failureReason": "Phone number not reachable",
+      "templateId": "elegant-template-1",
+      "createdAt": "2025-07-01T11:30:00Z",
+      "updatedAt": "2025-07-01T11:31:00Z"
+    },
+    {
+      "id": "msg-6",
+      "eventId": "demo-event-1",
+      "recipientId": "guest-6",
+      "recipientName": "Jennifer Martinez",
+      "recipientPhone": "60123456794",
+      "content": "Hi Jennifer! You're invited to Sarah & John's Wedding on August 15th at Grand Ballroom, Elegant Hotel. Please RSVP by July 15th: http://localhost:3000/rsvp/rsvp-token-jennifer-martinez-pqr678",
+      "messageType": "invitation",
+      "deliveryStatus": "sent",
+      "scheduledAt": "2025-07-01T12:00:00Z",
+      "sentAt": "2025-07-01T12:00:15Z",
+      "deliveredAt": null,
+      "templateId": "elegant-template-1",
+      "createdAt": "2025-07-01T12:00:00Z",
+      "updatedAt": "2025-07-01T12:00:15Z"
+    },
+    {
+      "id": "msg-7",
+      "eventId": "demo-event-1",
+      "recipientId": "guest-7",
+      "recipientName": "Thomas Anderson",
+      "recipientPhone": "60123456795",
+      "content": "Hi Thomas! You're invited to Sarah & John's Wedding on August 15th at Grand Ballroom, Elegant Hotel. Please RSVP by July 15th: http://localhost:3000/rsvp/rsvp-token-thomas-anderson-stu901",
+      "messageType": "invitation",
+      "deliveryStatus": "delivered",
+      "scheduledAt": "2025-07-01T12:15:00Z",
+      "sentAt": "2025-07-01T12:15:20Z",
+      "deliveredAt": "2025-07-01T12:16:05Z",
+      "templateId": "elegant-template-1",
+      "createdAt": "2025-07-01T12:15:00Z",
+      "updatedAt": "2025-07-01T12:16:05Z"
+    },
+    {
+      "id": "msg-8",
+      "eventId": "demo-event-1",
+      "recipientId": "guest-8",
+      "recipientName": "Maria Rodriguez",
+      "recipientPhone": "60123456796",
+      "content": "Hi Maria! You're invited to Sarah & John's Wedding on August 15th at Grand Ballroom, Elegant Hotel. Please RSVP by July 15th: http://localhost:3000/rsvp/rsvp-token-maria-rodriguez-vwx234",
+      "messageType": "invitation",
+      "deliveryStatus": "delivered",
+      "scheduledAt": "2025-07-01T12:30:00Z",
+      "sentAt": "2025-07-01T12:30:35Z",
+      "deliveredAt": "2025-07-01T12:31:20Z",
+      "templateId": "elegant-template-1",
+      "createdAt": "2025-07-01T12:30:00Z",
+      "updatedAt": "2025-07-01T12:31:20Z"
+    }
+  ],
+  "publicRSVPRegistrations": [
+    {
+      "id": "public-guest-1",
+      "eventId": "demo-event-1",
+      "name": "Alex Thompson",
+      "phoneNumber": "60123456804",
+      "dietaryRestrictions": [],
+      "additionalGuestCount": 1,
+      "relationshipType": "Friend",
+      "brideOrGroomSide": "bride",
+      "rsvpStatus": "accepted",
+      "specialRequests": "Vegetarian meal for +1",
+      "registeredAt": "2025-07-02T15:30:00Z",
+      "rsvpSubmittedAt": "2025-07-02T15:35:00Z"
+    },
+    {
+      "id": "public-guest-2",
+      "eventId": "demo-event-1",
+      "name": "Rachel Green",
+      "phoneNumber": "60123456805",
+      "dietaryRestrictions": [
+        "Gluten-free"
+      ],
+      "additionalGuestCount": 0,
+      "relationshipType": "Colleague",
+      "brideOrGroomSide": "groom",
+      "rsvpStatus": "declined",
+      "specialRequests": "Thank you for the invitation, unfortunately cannot attend",
+      "registeredAt": "2025-07-03T09:15:00Z",
+      "rsvpSubmittedAt": "2025-07-03T09:20:00Z"
+    }
+  ],
+  "analytics": {
+    "totalGuests": 15,
+    "totalInvitedGuests": 15,
+    "totalPublicRegistrations": 2,
+    "rsvpStatusCounts": {
+      "pending": 5,
+      "accepted": 6,
+      "declined": 2,
+      "no_response": 2
+    },
+    "dietaryRestrictionsSummary": {
+      "Vegetarian": 3,
+      "Gluten-free": 3,
+      "Vegan": 2,
+      "Lactose-free": 1,
+      "Nut allergy": 1,
+      "None": 5
+    },
+    "brideGroomSideCounts": {
+      "bride": 8,
+      "groom": 7
+    },
+    "relationshipTypeCounts": {
+      "Uncle": 2,
+      "Friend": 3,
+      "Colleague": 3,
+      "Cousin": 3,
+      "Sibling": 2,
+      "Aunt": 1,
+      "Other": 1
+    },
+    "messagingStats": {
+      "totalMessagesSent": 8,
+      "deliveredMessages": 6,
+      "failedMessages": 1,
+      "pendingMessages": 1,
+      "deliveryRate": 75
+    },
+    "rsvpTokenStats": {
+      "totalTokensGenerated": 15,
+      "tokensUsed": 6,
+      "tokensExpired": 0,
+      "tokenUsageRate": 40
+    }
+  }
+}

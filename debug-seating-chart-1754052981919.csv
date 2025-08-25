@@ -1,0 +1,15 @@
+Table Name,Guest Name,Additional Guests,Total Seats,Dietary Restrictions,Special Requests,Table Position X,Table Position Y
+"Table 1 - Family","Michael Johnson",1,2,"Vegetarian","Wheelchair accessible seating please",100,300
+"Table 1 - Family","Robert Wilson",1,2,"","",100,300
+"Table 2 - Friends","Emily Davis",0,1,"Gluten-free","",300,300
+"Table 2 - Friends","Lisa Anderson",0,1,"Vegan","Please seat near the dance floor",300,300
+"Table 3 - Colleagues","David Brown",2,3,"","",450,300
+"Table 4 - Extended Family","[Empty Table]",0,0,"","",100,400
+
+Statistics
+Total Guests,15
+Total Seats Required,30
+Occupied Seats,9
+Available Seats,23
+Tables Used,3
+Total Tables,4

@@ -1,0 +1,69 @@
+{
+  "timestamp": "2025-08-01T11:49:04.610Z",
+  "summary": {
+    "total": 10,
+    "passed": 1,
+    "failed": 9
+  },
+  "results": [
+    {
+      "test": "Basic Auto-Arrangement",
+      "status": "failed",
+      "error": "Request failed with status code 404"
+    },
+    {
+      "test": "Auto-Arrangement with Locked Tables",
+      "status": "failed",
+      "error": "Request failed with status code 404"
+    },
+    {
+      "test": "Dietary Restrictions Grouping",
+      "status": "failed",
+      "error": "Request failed with status code 404"
+    },
+    {
+      "test": "Manual Guest Assignment",
+      "status": "failed",
+      "error": "No guests or tables available for assignment"
+    },
+    {
+      "test": "Guest Reassignment",
+      "status": "failed",
+      "error": "No guests or tables available for reassignment"
+    },
+    {
+      "test": "Capacity Validation",
+      "status": "passed",
+      "result": {
+        "table": "VIP Table",
+        "capacity": 4,
+        "results": []
+      }
+    },
+    {
+      "test": "Table Lock/Unlock",
+      "status": "failed",
+      "error": "Request failed with status code 404"
+    },
+    {
+      "test": "Locked Table Preservation",
+      "status": "failed",
+      "error": "Cannot read properties of undefined (reading 'id')"
+    },
+    {
+      "test": "Export Seating Chart",
+      "status": "failed",
+      "error": "Request failed with status code 404"
+    },
+    {
+      "test": "Export Guest List",
+      "status": "failed",
+      "error": "Request failed with status code 404"
+    }
+  ],
+  "demoConfig": {
+    "guests": 26,
+    "tables": 6,
+    "acceptedGuests": 0
+  }
+}

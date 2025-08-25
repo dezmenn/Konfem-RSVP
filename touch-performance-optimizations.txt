@@ -1,0 +1,61 @@
+
+// Performance-optimized touch component with debouncing and memory management
+import { useMemo, useCallback, useRef } from 'react';
+
+// Debounce function to prevent rapid gesture events
+const useDebounce = (callback, delay) => {
+  const timeoutRef = useRef(null);
+  
+  return useCallback((...args) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    
+    timeoutRef.current = setTimeout(() => {
+      callback(...args);
+    }, delay);
+  }, [callback, delay]);
+};
+
+// Memory-optimized PanResponder creation
+const useMemoizedPanResponder = (guest, sourceType, handlers) => {
+  return useMemo(() => {
+    return PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (_, gestureState) => {
+        return Math.abs(gestureState.dx) > 10 || Math.abs(gestureState.dy) > 10;
+      },
+      onPanResponderGrant: handlers.onGrant,
+      onPanResponderMove: handlers.onMove,
+      onPanResponderRelease: handlers.onRelease,
+      onPanResponderTerminate: handlers.onTerminate,
+    });
+  }, [guest.id, sourceType, handlers]);
+};
+
+// Performance monitoring
+const usePerformanceMonitor = () => {
+  const performanceRef = useRef({
+    gestureStartTime: 0,
+    gestureCount: 0,
+    averageGestureTime: 0
+  });
+
+  const startGesture = useCallback(() => {
+    performanceRef.current.gestureStartTime = Date.now();
+  }, []);
+
+  const endGesture = useCallback(() => {
+    const duration = Date.now() - performanceRef.current.gestureStartTime;
+    performanceRef.current.gestureCount++;
+    performanceRef.current.averageGestureTime = 
+      (performanceRef.current.averageGestureTime + duration) / 2;
+    
+    // Log performance warning if gestures are taking too long
+    if (duration > 100) {
+      console.warn('Slow gesture detected:', duration + 'ms');
+    }
+  }, []);
+
+  return { startGesture, endGesture, performance: performanceRef.current };
+};

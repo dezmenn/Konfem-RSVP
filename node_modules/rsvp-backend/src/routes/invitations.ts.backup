@@ -1,0 +1,418 @@
+import express from 'express';
+import { InvitationService } from '../services/InvitationService';
+import { MessagingService } from '../services/MessagingService';
+import { WhatsAppMockService } from '../services/WhatsAppMockService';
+import { MessageRepository } from '../repositories/MessageRepository';
+import { EventRepository } from '../repositories/EventRepository';
+import { MockEventService } from '../services/MockEventService';
+import { MockGuestRepository } from '../services/MockGuestRepository';
+import { InvitationScheduleModel } from '../models/InvitationSchedule';
+import { logger } from '../utils/logger';
+
+const router = express.Router();
+
+// Lazy initialization of services to avoid database connection issues
+let invitationService: InvitationService;
+
+function getInvitationService(): InvitationService {
+  if (!invitationService) {
+    // Use the global WhatsApp service instance if available (demo mode)
+    const globalWhatsAppService = (global as any).whatsAppMockService;
+    let whatsAppService: WhatsAppMockService;
+    
+    if (globalWhatsAppService) {
+      whatsAppService = globalWhatsAppService;
+    } else {
+      // Fallback to creating new instance
+      const messageRepository = new MessageRepository();
+      whatsAppService = new WhatsAppMockService(messageRepository);
+    }
+    
+    const messagingService = new MessagingService(whatsAppService);
+    
+    // Use mock services in demo mode
+    if (process.env.SKIP_DB_SETUP === 'true') {
+      const mockEventService = new MockEventService();
+      const mockGuestRepository = new MockGuestRepository();
+      invitationService = new InvitationService(messagingService, mockEventService, mockGuestRepository);
+    } else {
+      invitationService = new InvitationService(messagingService);
+    }
+  }
+  return invitationService;
+}
+
+/**
+ * Send bulk invitations to all uninvited guests
+ * POST /api/invitations/bulk-invite/:eventId
+ */
+router.post('/bulk-invite/:eventId', async (req, res) => {
+  try {
+    const { eventId } = req.params;
+    const result = await getInvitationService().sendBulkInvitations(eventId);
+
+    res.json({
+      success: true,
+      data: result,
+      message: `Successfully sent ${result.invitationsSent} invitations to ${result.guestsInvited} guests`
+    });
+  } catch (error) {
+    logger.error('Error sending bulk invitations:', error);
+    res.status(500).json({ 
+      error: error instanceof Error ? error.message : 'Failed to send bulk invitations' 
+    });
+  }
+});
+
+/**
+ * Configure invitation schedules for an event
+ * POST /api/invitations/configure
+ */
+router.post('/configure', async (req, res) => {
+  try {
+    const { eventId, schedules } = req.body;
+
+    if (!eventId) {
+      return res.status(400).json({ error: 'Event ID is required' });
+    }
+
+    if (!schedules || !Array.isArray(schedules) || schedules.length === 0) {
+      return res.status(400).json({ error: 'Schedules array is required' });
+    }
+
+    // Validate each schedule
+    for (const schedule of schedules) {
+      if (typeof schedule.triggerDays !== 'number' || schedule.triggerDays < 0) {
+        return res.status(400).json({ 
+          error: `Invalid trigger days: ${schedule.triggerDays}. Must be a non-negative number.` 
+        });
+      }
+
+      if (!schedule.messageTemplate || typeof schedule.messageTemplate !== 'string') {
+        return res.status(400).json({ 
+          error: 'Message template is required for each schedule' 
+        });
+      }
+    }
+
+    const invitationSchedules = await getInvitationService().configureInvitations({
+      eventId,
+      schedules
+    });
+
+    res.json({
+      success: true,
+      data: invitationSchedules,
+      message: `Created ${invitationSchedules.length} invitation schedules`
+    });
+  } catch (error) {
+    logger.error('Error configuring invitations:', error);
+    res.status(500).json({ 
+      error: error instanceof Error ? error.message : 'Failed to configure invitations' 
+    });
+  }
+});
+
+/**
+ * Get invitation schedules for an event
+ * GET /api/invitations/event/:eventId
+ */
+router.get('/event/:eventId', async (req, res) => {
+  try {
+    const { eventId } = req.params;
+    const schedules = await getInvitationService().getInvitationSchedules(eventId);
+
+    res.json({
+      success: true,
+      data: schedules
+    });
+  } catch (error) {
+    logger.error('Error getting invitation schedules:', error);
+    res.status(500).json({ 
+      error: error instanceof Error ? error.message : 'Failed to get invitation schedules' 
+    });
+  }
+});
+
+/**
+ * Update an invitation schedule
+ * PUT /api/invitations/schedule/:scheduleId
+ */
+router.put('/schedule/:scheduleId', async (req, res) => {
+  try {
+    const { scheduleId } = req.params;
+    const update = req.body;
+
+    const updatedSchedule = await getInvitationService().updateInvitationSchedule(scheduleId, update);
+
+    if (!updatedSchedule) {
+      return res.status(404).json({ error: 'Invitation schedule not found' });
+    }
+
+    res.json({
+      success: true,
+      data: updatedSchedule,
+      message: 'Invitation schedule updated successfully'
+    });
+  } catch (error) {
+    logger.error('Error updating invitation schedule:', error);
+    res.status(500).json({ 
+      error: error instanceof Error ? error.message : 'Failed to update invitation schedule' 
+    });
+  }
+});
+
+/**
+ * Delete an invitation schedule
+ * DELETE /api/invitations/schedule/:scheduleId
+ */
+router.delete('/schedule/:scheduleId', async (req, res) => {
+  try {
+    const { scheduleId } = req.params;
+    const deleted = await getInvitationService().deleteInvitationSchedule(scheduleId);
+
+    if (!deleted) {
+      return res.status(404).json({ error: 'Invitation schedule not found' });
+    }
+
+    res.json({
+      success: true,
+      message: 'Invitation schedule deleted successfully'
+    });
+  } catch (error) {
+    logger.error('Error deleting invitation schedule:', error);
+    res.status(500).json({ 
+      error: error instanceof Error ? error.message : 'Failed to delete invitation schedule' 
+    });
+  }
+});
+
+/**
+ * Activate or deactivate an invitation schedule
+ * POST /api/invitations/schedule/:scheduleId/toggle
+ */
+router.post('/schedule/:scheduleId/toggle', async (req, res) => {
+  try {
+    const { scheduleId } = req.params;
+    const { isActive } = req.body;
+
+    if (typeof isActive !== 'boolean') {
+      return res.status(400).json({ error: 'isActive must be a boolean value' });
+    }
+
+    const updatedSchedule = await getInvitationService().setInvitationScheduleActive(scheduleId, isActive);
+
+    if (!updatedSchedule) {
+      return res.status(404).json({ error: 'Invitation schedule not found' });
+    }
+
+    res.json({
+      success: true,
+      data: updatedSchedule,
+      message: `Invitation schedule ${isActive ? 'activated' : 'deactivated'} successfully`
+    });
+  } catch (error) {
+    logger.error('Error toggling invitation schedule:', error);
+    res.status(500).json({ 
+      error: error instanceof Error ? error.message : 'Failed to toggle invitation schedule' 
+    });
+  }
+});
+
+/**
+ * Execute scheduled invitations manually
+ * POST /api/invitations/execute
+ */
+router.post('/execute', async (req, res) => {
+  try {
+    const results = await getInvitationService().executeScheduledInvitations();
+
+    const summary = {
+      totalExecutions: results.length,
+      totalGuestsProcessed: results.reduce((sum, r) => sum + r.guestsProcessed, 0),
+      totalInvitationsScheduled: results.reduce((sum, r) => sum + r.invitationsScheduled, 0),
+      totalInvitationsSkipped: results.reduce((sum, r) => sum + r.invitationsSkipped, 0),
+      totalErrors: results.reduce((sum, r) => sum + r.errors.length, 0)
+    };
+
+    res.json({
+      success: true,
+      data: {
+        executions: results,
+        summary
+      },
+      message: `Executed ${results.length} invitation schedules`
+    });
+  } catch (error) {
+    logger.error('Error executing scheduled invitations:', error);
+    res.status(500).json({ 
+      error: error instanceof Error ? error.message : 'Failed to execute scheduled invitations' 
+    });
+  }
+});
+
+/**
+ * Get invitation status for an event
+ * GET /api/invitations/status/:eventId
+ */
+router.get('/status/:eventId', async (req, res) => {
+  try {
+    const { eventId } = req.params;
+    const status = await getInvitationService().getInvitationStatus(eventId);
+
+    res.json({
+      success: true,
+      data: status
+    });
+  } catch (error) {
+    logger.error('Error getting invitation status:', error);
+    res.status(500).json({ 
+      error: error instanceof Error ? error.message : 'Failed to get invitation status' 
+    });
+  }
+});
+
+/**
+ * Execute invitations for a specific schedule
+ * POST /api/invitations/execute/:scheduleId
+ */
+router.post('/execute/:scheduleId', async (req, res) => {
+  try {
+    const { scheduleId } = req.params;
+    const result = await getInvitationService().executeInvitations(scheduleId);
+
+    res.json({
+      success: true,
+      data: result,
+      message: `Executed invitations for schedule ${scheduleId}`
+    });
+  } catch (error) {
+    logger.error('Error executing invitations:', error);
+    res.status(500).json({ 
+      error: error instanceof Error ? error.message : 'Failed to execute invitations' 
+    });
+  }
+});
+
+/**
+ * Execute all active invitations for an event
+ * POST /api/invitations/execute-all/:eventId
+ */
+router.post('/execute-all/:eventId', async (req, res) => {
+  try {
+    const { eventId } = req.params;
+    const results = await getInvitationService().executeAllInvitations(eventId);
+
+    const totalInvitations = results.reduce((sum, r) => sum + r.invitationsScheduled, 0);
+    const totalErrors = results.reduce((sum, r) => sum + r.errors.length, 0);
+
+    res.json({
+      success: true,
+      data: results,
+      message: `Executed ${results.length} invitation schedules, sent ${totalInvitations} invitations${totalErrors > 0 ? ` with ${totalErrors} errors` : ''}`
+    });
+  } catch (error) {
+    logger.error('Error executing all invitations:', error);
+    res.status(500).json({ 
+      error: error instanceof Error ? error.message : 'Failed to execute all invitations' 
+    });
+  }
+});
+
+/**
+ * Get invitation execution history for an event
+ * GET /api/invitations/executions/:eventId
+ */
+router.get('/executions/:eventId', async (req, res) => {
+  try {
+    const { eventId } = req.params;
+    const executions = await getInvitationService().getInvitationExecutions(eventId);
+
+    res.json({
+      success: true,
+      data: executions
+    });
+  } catch (error) {
+    logger.error('Error getting invitation executions:', error);
+    res.status(500).json({ 
+      error: error instanceof Error ? error.message : 'Failed to get invitation executions' 
+    });
+  }
+});
+
+/**
+ * Create default invitation schedules for an event
+ * POST /api/invitations/defaults/:eventId
+ */
+router.post('/defaults/:eventId', async (req, res) => {
+  try {
+    const { eventId } = req.params;
+    const schedules = await getInvitationService().createDefaultInvitations(eventId);
+
+    res.json({
+      success: true,
+      data: schedules,
+      message: `Created ${schedules.length} default invitation schedules`
+    });
+  } catch (error) {
+    logger.error('Error creating default invitations:', error);
+    res.status(500).json({ 
+      error: error instanceof Error ? error.message : 'Failed to create default invitations' 
+    });
+  }
+});
+
+/**
+ * Get invitation statistics for an event
+ * GET /api/invitations/statistics/:eventId
+ */
+router.get('/statistics/:eventId', async (req, res) => {
+  try {
+    const { eventId } = req.params;
+    const statistics = await getInvitationService().getInvitationStatistics(eventId);
+
+    res.json({
+      success: true,
+      data: statistics
+    });
+  } catch (error) {
+    logger.error('Error getting invitation statistics:', error);
+    res.status(500).json({ 
+      error: error instanceof Error ? error.message : 'Failed to get invitation statistics' 
+    });
+  }
+});
+
+/**
+ * Get default invitation template
+ * GET /api/invitations/template/default
+ */
+router.get('/template/default', async (req, res) => {
+  try {
+    const defaultTemplate = InvitationScheduleModel.getDefaultTemplate();
+
+    res.json({
+      success: true,
+      data: {
+        template: defaultTemplate,
+        availableVariables: [
+          '{{guestName}}',
+          '{{eventTitle}}',
+          '{{eventDate}}',
+          '{{eventTime}}',
+          '{{eventLocation}}',
+          '{{rsvpDeadline}}',
+          '{{rsvpLink}}',
+          '{{organizerName}}'
+        ]
+      }
+    });
+  } catch (error) {
+    logger.error('Error getting default template:', error);
+    res.status(500).json({ 
+      error: error instanceof Error ? error.message : 'Failed to get default template' 
+    });
+  }
+});
+
+export default router;

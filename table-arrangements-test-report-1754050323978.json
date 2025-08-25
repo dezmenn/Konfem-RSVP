@@ -1,0 +1,114 @@
+{
+  "timestamp": "2025-08-01T12:12:03.977Z",
+  "summary": {
+    "total": 10,
+    "passed": 8,
+    "failed": 2
+  },
+  "results": [
+    {
+      "test": "Basic Auto-Arrangement",
+      "status": "passed",
+      "result": {
+        "success": true,
+        "message": "Successfully arranged 24 guests across 5 tables",
+        "arrangedGuests": 24
+      }
+    },
+    {
+      "test": "Auto-Arrangement with Locked Tables",
+      "status": "passed",
+      "result": {
+        "success": true,
+        "message": "All eligible guests are already assigned to tables",
+        "arrangedGuests": 0
+      }
+    },
+    {
+      "test": "Dietary Restrictions Grouping",
+      "status": "passed",
+      "result": {
+        "arrangement": {
+          "success": true,
+          "message": "All eligible guests are already assigned to tables",
+          "arrangedGuests": 0
+        },
+        "analysis": {
+          "vegetarianTables": [],
+          "glutenFreeTables": [],
+          "mixedDietTables": [
+            "Table 1 - Family",
+            "Table 3 - Colleagues",
+            "Table 1",
+            "Table 3"
+          ],
+          "regularTables": [
+            "Table 2 - Friends",
+            "Table 4"
+          ]
+        }
+      }
+    },
+    {
+      "test": "Manual Guest Assignment",
+      "status": "failed",
+      "error": "Request failed with status code 400"
+    },
+    {
+      "test": "Guest Reassignment",
+      "status": "failed",
+      "error": "Request failed with status code 400"
+    },
+    {
+      "test": "Capacity Validation",
+      "status": "passed",
+      "result": {
+        "table": "VIP Table",
+        "capacity": 4,
+        "results": [
+          "❌ Failed to assign Sarah Johnson (Bride): Request failed with status code 400"
+        ]
+      }
+    },
+    {
+      "test": "Table Lock/Unlock",
+      "status": "passed",
+      "result": {
+        "table": "Table 1",
+        "lockTest": "passed"
+      }
+    },
+    {
+      "test": "Locked Table Preservation",
+      "status": "passed",
+      "result": {
+        "table": "Table 2",
+        "guest": "Sarah Johnson (Bride)",
+        "preserved": true
+      }
+    },
+    {
+      "test": "Export Seating Chart",
+      "status": "passed",
+      "result": {
+        "filename": "demo-seating-chart-1754050323947.pdf",
+        "size": 23,
+        "contentType": "application/pdf"
+      }
+    },
+    {
+      "test": "Export Guest List",
+      "status": "passed",
+      "result": {
+        "filename": "demo-guest-list-1754050323961.csv",
+        "size": 149,
+        "contentType": "text/csv"
+      }
+    }
+  ],
+  "demoConfig": {
+    "guests": 26,
+    "tables": 6,
+    "acceptedGuests": 24
+  }
+}

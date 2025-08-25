@@ -1,0 +1,254 @@
+{
+  "summary": {
+    "passed": 0,
+    "total": 5,
+    "successRate": 0,
+    "totalDuration": 19,
+    "timestamp": "2025-08-09T08:44:20.197Z"
+  },
+  "testResults": [
+    {
+      "name": "Dashboard Data Accuracy",
+      "success": false,
+      "duration": 3
+    },
+    {
+      "name": "Real-time Updates",
+      "success": false,
+      "duration": 1
+    },
+    {
+      "name": "Dashboard Performance",
+      "success": false,
+      "duration": 2
+    },
+    {
+      "name": "Analytics Calculations",
+      "success": false,
+      "duration": 2
+    },
+    {
+      "name": "Dashboard Error Handling",
+      "success": false,
+      "duration": 1
+    }
+  ],
+  "detailedLogs": [
+    {
+      "timestamp": "2025-08-09T08:44:20.171Z",
+      "type": "info",
+      "message": "🚀 Starting Dashboard Analytics and Real-time Updates Testing",
+      "testTime": 1
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.172Z",
+      "type": "info",
+      "message": "Testing against: http://localhost:5000/api",
+      "testTime": 1
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.172Z",
+      "type": "info",
+      "message": "Event ID: demo-event-1",
+      "testTime": 1
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.173Z",
+      "type": "info",
+      "message": "",
+      "testTime": 2
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.173Z",
+      "type": "info",
+      "message": "\n--- Running Dashboard Data Accuracy ---",
+      "testTime": 3
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.175Z",
+      "type": "info",
+      "message": "=== Testing Dashboard Data Accuracy ===",
+      "testTime": 4
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.176Z",
+      "type": "error",
+      "message": "✗ Dashboard data accuracy test failed: fetch is not a function",
+      "testTime": 5
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.177Z",
+      "type": "info",
+      "message": "Dashboard Data Accuracy completed in 3ms: ✗ FAILED",
+      "testTime": 6
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.177Z",
+      "type": "info",
+      "message": "\n--- Running Real-time Updates ---",
+      "testTime": 7
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.178Z",
+      "type": "info",
+      "message": "=== Testing Real-time Updates ===",
+      "testTime": 7
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.179Z",
+      "type": "error",
+      "message": "✗ Real-time updates test failed: fetch is not a function",
+      "testTime": 8
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.179Z",
+      "type": "info",
+      "message": "Real-time Updates completed in 1ms: ✗ FAILED",
+      "testTime": 9
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.180Z",
+      "type": "info",
+      "message": "\n--- Running Dashboard Performance ---",
+      "testTime": 9
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.180Z",
+      "type": "info",
+      "message": "=== Testing Dashboard Performance ===",
+      "testTime": 10
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.181Z",
+      "type": "error",
+      "message": "✗ Dashboard performance test failed: fetch is not a function",
+      "testTime": 11
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.182Z",
+      "type": "info",
+      "message": "Dashboard Performance completed in 2ms: ✗ FAILED",
+      "testTime": 11
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.182Z",
+      "type": "info",
+      "message": "\n--- Running Analytics Calculations ---",
+      "testTime": 12
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.183Z",
+      "type": "info",
+      "message": "=== Testing Analytics Calculations ===",
+      "testTime": 13
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.184Z",
+      "type": "error",
+      "message": "✗ Analytics calculations test failed: fetch is not a function",
+      "testTime": 14
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.185Z",
+      "type": "info",
+      "message": "Analytics Calculations completed in 2ms: ✗ FAILED",
+      "testTime": 14
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.185Z",
+      "type": "info",
+      "message": "\n--- Running Dashboard Error Handling ---",
+      "testTime": 15
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.186Z",
+      "type": "info",
+      "message": "=== Testing Dashboard Error Handling ===",
+      "testTime": 16
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.187Z",
+      "type": "error",
+      "message": "✗ Dashboard error handling test failed: fetch is not a function",
+      "testTime": 16
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.187Z",
+      "type": "info",
+      "message": "Dashboard Error Handling completed in 1ms: ✗ FAILED",
+      "testTime": 17
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.188Z",
+      "type": "info",
+      "message": "\n============================================================",
+      "testTime": 17
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.188Z",
+      "type": "info",
+      "message": "📊 DASHBOARD ANALYTICS TEST SUMMARY",
+      "testTime": 18
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.189Z",
+      "type": "info",
+      "message": "============================================================",
+      "testTime": 19
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.190Z",
+      "type": "info",
+      "message": "Tests passed: 0/5",
+      "testTime": 20
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.191Z",
+      "type": "info",
+      "message": "Total duration: 19ms",
+      "testTime": 21
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.192Z",
+      "type": "info",
+      "message": "Success rate: 0.0%",
+      "testTime": 21
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.193Z",
+      "type": "info",
+      "message": "  ✗ Dashboard Data Accuracy (3ms)",
+      "testTime": 23
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.194Z",
+      "type": "info",
+      "message": "  ✗ Real-time Updates (1ms)",
+      "testTime": 23
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.194Z",
+      "type": "info",
+      "message": "  ✗ Dashboard Performance (2ms)",
+      "testTime": 24
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.195Z",
+      "type": "info",
+      "message": "  ✗ Analytics Calculations (2ms)",
+      "testTime": 25
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.196Z",
+      "type": "info",
+      "message": "  ✗ Dashboard Error Handling (1ms)",
+      "testTime": 25
+    },
+    {
+      "timestamp": "2025-08-09T08:44:20.196Z",
+      "type": "info",
+      "message": "\n⚠️  5 test(s) failed. Check the logs above for details.",
+      "testTime": 26
+    }
+  ]
+}

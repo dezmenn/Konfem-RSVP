@@ -1,0 +1,247 @@
+{
+  "timestamp": "2025-08-09T08:56:26.475Z",
+  "platform": "win32",
+  "networkInterfaces": [
+    {
+      "interface": "Local Area Connection* 2",
+      "address": "198.18.28.251",
+      "netmask": "255.255.128.0"
+    },
+    {
+      "interface": "Wi-Fi",
+      "address": "192.168.100.55",
+      "netmask": "255.255.255.0"
+    }
+  ],
+  "recommendedConfig": {
+    "config": "/**\n * Mobile App Configuration - Updated for Network Connectivity\n * Generated on: 2025-08-09T08:56:26.459Z\n */\n\nimport { Platform } from 'react-native';\n\nconst getApiBaseUrl = () => {\n  if (__DEV__) {\n    // Development mode\n    if (Platform.OS === 'android') {\n      // For Android emulator, use 10.0.2.2\n      // For Android physical device, use your computer's WiFi IP\n      return Platform.select({\n        android: 'http://198.18.28.251:5000', // Your WiFi IP\n        default: 'http://localhost:5000'\n      });\n    } else if (Platform.OS === 'ios') {\n      // iOS simulator can use localhost\n      return 'http://localhost:5000';\n    } else {\n      // Web/Expo web\n      return 'http://localhost:5000';\n    }\n  } else {\n    // Production mode\n    return 'https://your-production-api.com';\n  }\n};\n\nexport const API_BASE_URL = getApiBaseUrl();\n\nexport const config = {\n  apiBaseUrl: API_BASE_URL,\n  eventId: 'demo-event-1',\n  wsUrl: API_BASE_URL.replace('http', 'ws'),\n  \n  // Debug settings\n  timeout: 10000, // 10 second timeout\n  retries: 3,     // Retry failed requests 3 times\n};\n\n// Debug logging\nconsole.log('Mobile App Config:', {\n  platform: Platform.OS,\n  apiBaseUrl: config.apiBaseUrl,\n  isDev: __DEV__,\n  timestamp: new Date().toISOString()\n});\n\nexport default config;",
+    "recommendedIP": "198.18.28.251"
+  },
+  "diagnosticLogs": [
+    {
+      "timestamp": "2025-08-09T08:56:26.188Z",
+      "type": "info",
+      "message": "🔍 Starting Mobile Network Diagnostics"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.196Z",
+      "type": "info",
+      "message": "Platform: win32"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.197Z",
+      "type": "info",
+      "message": "Node.js: v22.17.0"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.197Z",
+      "type": "info",
+      "message": ""
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.199Z",
+      "type": "info",
+      "message": "=== Network Interface Analysis ==="
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.212Z",
+      "type": "info",
+      "message": "Found network interface: Local Area Connection* 2 - 198.18.28.251"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.213Z",
+      "type": "info",
+      "message": "Found network interface: Wi-Fi - 192.168.100.55"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.214Z",
+      "type": "info",
+      "message": "=== Backend Connectivity Test ==="
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.215Z",
+      "type": "info",
+      "message": "Testing: http://localhost:5000/api/health"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.300Z",
+      "type": "error",
+      "message": "✗ http://localhost:5000/api/health - Error: Command failed: curl -s -o /dev/null -w \"%{http_code}\" --connect-timeout 5 \"http://localhost:5000/api/health\""
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.301Z",
+      "type": "info",
+      "message": "Testing: http://127.0.0.1:5000/api/health"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.367Z",
+      "type": "error",
+      "message": "✗ http://127.0.0.1:5000/api/health - Error: Command failed: curl -s -o /dev/null -w \"%{http_code}\" --connect-timeout 5 \"http://127.0.0.1:5000/api/health\""
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.368Z",
+      "type": "info",
+      "message": "Testing: http://localhost:5000/api/guests/events/demo-event-1"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.457Z",
+      "type": "error",
+      "message": "✗ http://localhost:5000/api/guests/events/demo-event-1 - Error: Command failed: curl -s -o /dev/null -w \"%{http_code}\" --connect-timeout 5 \"http://localhost:5000/api/guests/events/demo-event-1\""
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.458Z",
+      "type": "info",
+      "message": "=== Generating Mobile Configuration ==="
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.458Z",
+      "type": "info",
+      "message": "Recommended IP for mobile: 198.18.28.251"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.459Z",
+      "type": "info",
+      "message": "=== Troubleshooting Steps ==="
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.460Z",
+      "type": "info",
+      "message": "\n1. Verify Backend Server:"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.460Z",
+      "type": "info",
+      "message": "   • Make sure your backend server is running on port 5000"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.460Z",
+      "type": "info",
+      "message": "   • Check that you can access http://localhost:5000/api/health in your browser"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.461Z",
+      "type": "info",
+      "message": "   • Ensure the server is not blocked by firewall"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.461Z",
+      "type": "info",
+      "message": "\n2. Check Network Configuration:"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.462Z",
+      "type": "info",
+      "message": "   • Ensure your mobile device/emulator is on the same network as your computer"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.462Z",
+      "type": "info",
+      "message": "   • For Android emulator: Use 10.0.2.2:5000 instead of localhost"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.463Z",
+      "type": "info",
+      "message": "   • For physical devices: Use your computer's WiFi IP address"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.463Z",
+      "type": "info",
+      "message": "\n3. Update Mobile Configuration:"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.464Z",
+      "type": "info",
+      "message": "   • Update rsvp-mobile/config.ts with the correct IP address"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.464Z",
+      "type": "info",
+      "message": "   • Restart the Expo development server"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.465Z",
+      "type": "info",
+      "message": "   • Clear the app cache if necessary"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.466Z",
+      "type": "info",
+      "message": "\n4. Test Connectivity:"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.466Z",
+      "type": "info",
+      "message": "   • Use a network testing app to verify connectivity"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.467Z",
+      "type": "info",
+      "message": "   • Try accessing the API from your mobile browser first"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.467Z",
+      "type": "info",
+      "message": "   • Check for any proxy or VPN interference"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.468Z",
+      "type": "info",
+      "message": "\n============================================================"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.468Z",
+      "type": "info",
+      "message": "📋 DIAGNOSIS SUMMARY"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.469Z",
+      "type": "info",
+      "message": "============================================================"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.469Z",
+      "type": "info",
+      "message": "✓ Recommended mobile API URL: http://198.18.28.251:5000"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.470Z",
+      "type": "info",
+      "message": "✓ Updated configuration generated"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.470Z",
+      "type": "info",
+      "message": "\n💡 IMMEDIATE ACTIONS:"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.471Z",
+      "type": "info",
+      "message": "1. Ensure backend server is running: npm run dev:backend"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.471Z",
+      "type": "info",
+      "message": "2. Update mobile config with recommended IP address"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.472Z",
+      "type": "info",
+      "message": "3. Restart Expo development server"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.472Z",
+      "type": "info",
+      "message": "4. Test API connectivity from mobile browser first"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.474Z",
+      "type": "info",
+      "message": "\n📄 Updated configuration saved to: rsvp-mobile/config-updated.ts"
+    },
+    {
+      "timestamp": "2025-08-09T08:56:26.475Z",
+      "type": "info",
+      "message": "   Replace your existing config.ts with this file"
+    }
+  ]
+}

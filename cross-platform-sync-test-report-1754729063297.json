@@ -1,0 +1,350 @@
+{
+  "summary": {
+    "passed": 0,
+    "total": 7,
+    "successRate": 0,
+    "totalDuration": 1074,
+    "webSocketMessages": 0,
+    "timestamp": "2025-08-09T08:44:23.297Z"
+  },
+  "testResults": [
+    {
+      "name": "WebSocket Connection",
+      "success": false,
+      "duration": 1047
+    },
+    {
+      "name": "Data Synchronization",
+      "success": false,
+      "duration": 2
+    },
+    {
+      "name": "Offline Queueing",
+      "success": false,
+      "duration": 2
+    },
+    {
+      "name": "Conflict Resolution",
+      "success": false,
+      "duration": 2
+    },
+    {
+      "name": "Session Continuity",
+      "success": false,
+      "duration": 3
+    },
+    {
+      "name": "Cross-Platform Data Consistency",
+      "success": false,
+      "duration": 1
+    },
+    {
+      "name": "Sync Performance",
+      "success": false,
+      "duration": 1
+    }
+  ],
+  "webSocketMessages": [],
+  "detailedLogs": [
+    {
+      "timestamp": "2025-08-09T08:44:22.212Z",
+      "type": "info",
+      "message": "🚀 Starting Cross-Platform Synchronization Testing",
+      "testTime": 1
+    },
+    {
+      "timestamp": "2025-08-09T08:44:22.213Z",
+      "type": "info",
+      "message": "Testing against: http://localhost:5000/api",
+      "testTime": 2
+    },
+    {
+      "timestamp": "2025-08-09T08:44:22.214Z",
+      "type": "info",
+      "message": "WebSocket: ws://localhost:5000",
+      "testTime": 2
+    },
+    {
+      "timestamp": "2025-08-09T08:44:22.214Z",
+      "type": "info",
+      "message": "Event ID: demo-event-1",
+      "testTime": 3
+    },
+    {
+      "timestamp": "2025-08-09T08:44:22.215Z",
+      "type": "info",
+      "message": "",
+      "testTime": 3
+    },
+    {
+      "timestamp": "2025-08-09T08:44:22.215Z",
+      "type": "info",
+      "message": "\n--- Running WebSocket Connection ---",
+      "testTime": 4
+    },
+    {
+      "timestamp": "2025-08-09T08:44:22.216Z",
+      "type": "info",
+      "message": "=== Testing WebSocket Connection ===",
+      "testTime": 4
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.259Z",
+      "type": "error",
+      "message": "WebSocket error: socket hang up",
+      "testTime": 1048
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.261Z",
+      "type": "info",
+      "message": "WebSocket connection closed",
+      "testTime": 1049
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.263Z",
+      "type": "error",
+      "message": "✗ WebSocket connection test failed: socket hang up",
+      "testTime": 1051
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.263Z",
+      "type": "info",
+      "message": "WebSocket Connection completed in 1047ms: ✗ FAILED",
+      "testTime": 1052
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.264Z",
+      "type": "info",
+      "message": "\n--- Running Data Synchronization ---",
+      "testTime": 1052
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.265Z",
+      "type": "info",
+      "message": "=== Testing Data Synchronization ===",
+      "testTime": 1053
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.265Z",
+      "type": "error",
+      "message": "✗ Data synchronization test failed: fetch is not a function",
+      "testTime": 1054
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.266Z",
+      "type": "info",
+      "message": "Data Synchronization completed in 2ms: ✗ FAILED",
+      "testTime": 1054
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.266Z",
+      "type": "info",
+      "message": "\n--- Running Offline Queueing ---",
+      "testTime": 1055
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.267Z",
+      "type": "info",
+      "message": "=== Testing Offline Queueing ===",
+      "testTime": 1056
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.268Z",
+      "type": "error",
+      "message": "✗ Offline queueing test failed: fetch is not a function",
+      "testTime": 1057
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.269Z",
+      "type": "info",
+      "message": "Offline Queueing completed in 2ms: ✗ FAILED",
+      "testTime": 1057
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.269Z",
+      "type": "info",
+      "message": "\n--- Running Conflict Resolution ---",
+      "testTime": 1058
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.270Z",
+      "type": "info",
+      "message": "=== Testing Conflict Resolution ===",
+      "testTime": 1059
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.271Z",
+      "type": "error",
+      "message": "✗ Conflict resolution test failed: fetch is not a function",
+      "testTime": 1060
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.272Z",
+      "type": "info",
+      "message": "Conflict Resolution completed in 2ms: ✗ FAILED",
+      "testTime": 1061
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.273Z",
+      "type": "info",
+      "message": "\n--- Running Session Continuity ---",
+      "testTime": 1062
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.274Z",
+      "type": "info",
+      "message": "=== Testing Session Continuity ===",
+      "testTime": 1063
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.275Z",
+      "type": "error",
+      "message": "✗ Session continuity test failed: fetch is not a function",
+      "testTime": 1065
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.277Z",
+      "type": "info",
+      "message": "Session Continuity completed in 3ms: ✗ FAILED",
+      "testTime": 1066
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.278Z",
+      "type": "info",
+      "message": "\n--- Running Cross-Platform Data Consistency ---",
+      "testTime": 1067
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.279Z",
+      "type": "info",
+      "message": "=== Testing Cross-Platform Data Consistency ===",
+      "testTime": 1068
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.280Z",
+      "type": "error",
+      "message": "✗ Cross-platform data consistency test failed: fetch is not a function",
+      "testTime": 1068
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.280Z",
+      "type": "info",
+      "message": "Cross-Platform Data Consistency completed in 1ms: ✗ FAILED",
+      "testTime": 1069
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.281Z",
+      "type": "info",
+      "message": "\n--- Running Sync Performance ---",
+      "testTime": 1070
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.282Z",
+      "type": "info",
+      "message": "=== Testing Sync Performance ===",
+      "testTime": 1070
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.282Z",
+      "type": "error",
+      "message": "✗ Sync performance test failed: fetch is not a function",
+      "testTime": 1071
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.283Z",
+      "type": "info",
+      "message": "Sync Performance completed in 1ms: ✗ FAILED",
+      "testTime": 1071
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.284Z",
+      "type": "info",
+      "message": "\n============================================================",
+      "testTime": 1072
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.284Z",
+      "type": "info",
+      "message": "🔄 CROSS-PLATFORM SYNC TEST SUMMARY",
+      "testTime": 1073
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.285Z",
+      "type": "info",
+      "message": "============================================================",
+      "testTime": 1073
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.286Z",
+      "type": "info",
+      "message": "Tests passed: 0/7",
+      "testTime": 1074
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.286Z",
+      "type": "info",
+      "message": "Total duration: 1074ms",
+      "testTime": 1075
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.287Z",
+      "type": "info",
+      "message": "Success rate: 0.0%",
+      "testTime": 1076
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.288Z",
+      "type": "info",
+      "message": "WebSocket messages received: 0",
+      "testTime": 1077
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.289Z",
+      "type": "info",
+      "message": "  ✗ WebSocket Connection (1047ms)",
+      "testTime": 1078
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.290Z",
+      "type": "info",
+      "message": "  ✗ Data Synchronization (2ms)",
+      "testTime": 1079
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.291Z",
+      "type": "info",
+      "message": "  ✗ Offline Queueing (2ms)",
+      "testTime": 1080
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.292Z",
+      "type": "info",
+      "message": "  ✗ Conflict Resolution (2ms)",
+      "testTime": 1081
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.293Z",
+      "type": "info",
+      "message": "  ✗ Session Continuity (3ms)",
+      "testTime": 1082
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.294Z",
+      "type": "info",
+      "message": "  ✗ Cross-Platform Data Consistency (1ms)",
+      "testTime": 1082
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.294Z",
+      "type": "info",
+      "message": "  ✗ Sync Performance (1ms)",
+      "testTime": 1083
+    },
+    {
+      "timestamp": "2025-08-09T08:44:23.295Z",
+      "type": "info",
+      "message": "\n⚠️  7 test(s) failed. Check the logs above for details.",
+      "testTime": 1085
+    }
+  ]
+}

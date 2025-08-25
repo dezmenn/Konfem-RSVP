@@ -1,0 +1,12 @@
+Table Name,Guest Name,Additional Guests,Total Seats,Dietary Restrictions,Special Requests,Position X,Position Y
+"Table 1 - Family","Guest 1",1,2,"Vegetarian","Window seat preferred",100,300
+"Table 1 - Family","Guest 3",0,1,"Vegetarian","Window seat preferred",100,300
+"Table 2 - Friends","Guest 2",1,2,"Vegetarian","",300,300
+"Table 2 - Friends","Guest 4",0,1,"Vegetarian","",300,300
+"Table 3 - Colleagues","Guest 5",1,2,"Vegetarian","",450,300
+"Table 4 - Extended Family","[Empty Table]",0,0,"","",100,400
+
+Statistics
+Total Guests,15
+Total Tables,4
+Tables Used,3

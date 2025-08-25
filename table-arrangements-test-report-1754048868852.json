@@ -1,0 +1,65 @@
+{
+  "timestamp": "2025-08-01T11:47:48.851Z",
+  "summary": {
+    "total": 10,
+    "passed": 0,
+    "failed": 10
+  },
+  "results": [
+    {
+      "test": "Basic Auto-Arrangement",
+      "status": "failed",
+      "error": ""
+    },
+    {
+      "test": "Auto-Arrangement with Locked Tables",
+      "status": "failed",
+      "error": ""
+    },
+    {
+      "test": "Dietary Restrictions Grouping",
+      "status": "failed",
+      "error": ""
+    },
+    {
+      "test": "Manual Guest Assignment",
+      "status": "failed",
+      "error": "No guests or tables available for assignment"
+    },
+    {
+      "test": "Guest Reassignment",
+      "status": "failed",
+      "error": "No guests or tables available for reassignment"
+    },
+    {
+      "test": "Capacity Validation",
+      "status": "failed",
+      "error": "Reduce of empty array with no initial value"
+    },
+    {
+      "test": "Table Lock/Unlock",
+      "status": "failed",
+      "error": "Cannot read properties of undefined (reading 'id')"
+    },
+    {
+      "test": "Locked Table Preservation",
+      "status": "failed",
+      "error": "Cannot read properties of undefined (reading 'id')"
+    },
+    {
+      "test": "Export Seating Chart",
+      "status": "failed",
+      "error": ""
+    },
+    {
+      "test": "Export Guest List",
+      "status": "failed",
+      "error": ""
+    }
+  ],
+  "demoConfig": {
+    "guests": 0,
+    "tables": 0,
+    "acceptedGuests": 0
+  }
+}

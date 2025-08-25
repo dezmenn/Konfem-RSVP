@@ -1,0 +1,1 @@
+{"version":3,"file":"MockMessageRepository.d.ts","sourceRoot":"","sources":["../../src/services/MockMessageRepository.ts"],"names":[],"mappings":"AAAA,qBAAa,qBAAqB;IAC1B,eAAe,CAAC,OAAO,EAAE,GAAG,GAAG,OAAO,CAAC,GAAG,EAAE,CAAC;IAM7C,MAAM,CAAC,OAAO,EAAE,GAAG,GAAG,OAAO,CAAC,GAAG,CAAC;CAQzC"}

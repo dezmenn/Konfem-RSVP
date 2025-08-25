@@ -1,0 +1,38 @@
+[
+  {
+    "id": "contact-1",
+    "name": "Alex Johnson",
+    "phoneNumbers": [
+      "+1555987654"
+    ]
+  },
+  {
+    "id": "contact-2",
+    "name": "Emma Wilson",
+    "phoneNumbers": [
+      "+1555987655",
+      "+1555987656"
+    ]
+  },
+  {
+    "id": "contact-3",
+    "name": "Ryan Chen",
+    "phoneNumbers": [
+      "+1555987657"
+    ]
+  },
+  {
+    "id": "contact-4",
+    "name": "Olivia Garcia",
+    "phoneNumbers": [
+      "+1555987658"
+    ]
+  },
+  {
+    "id": "contact-5",
+    "name": "Noah Martinez",
+    "phoneNumbers": [
+      "+1555987659"
+    ]
+  }
+]

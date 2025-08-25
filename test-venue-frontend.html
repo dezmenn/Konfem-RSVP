@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venue Layout Frontend Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .info { background-color: #e2e3e5; border-color: #d6d8db; }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background-color: #0056b3; }
+        #venue-elements { margin-top: 20px; }
+        .element-item {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border-left: 4px solid #007bff;
+        }
+        .element-library {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .library-item {
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>🏛️ Venue Layout Management System - Frontend Test</h1>
+    
+    <div class="test-section info">
+        <h2>📋 Test Instructions</h2>
+        <p>This page tests the venue layout management system functionality:</p>
+        <ol>
+            <li>Load element library from backend API</li>
+            <li>Load existing venue layout</li>
+            <li>Test creating new elements</li>
+            <li>Test updating elements</li>
+            <li>Test validation</li>
+        </ol>
+        <p><strong>React App:</strong> The main venue layout interface is available at 
+           <a href="http://localhost:3000/admin/venue" target="_blank">http://localhost:3000/admin/venue</a>
+           (navigate through the main app)</p>
+    </div>
+
+    <div class="test-section">
+        <h2>🧪 API Connectivity Tests</h2>
+        <button onclick="testElementLibrary()">Test Element Library</button>
+        <button onclick="testVenueLayout()">Test Venue Layout</button>
+        <button onclick="testCreateElement()">Test Create Element</button>
+        <button onclick="testValidation()">Test Validation</button>
+        <div id="test-results"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📚 Element Library</h2>
+        <div id="element-library"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🏗️ Current Venue Layout</h2>
+        <div id="venue-elements"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api/venue-layout';
+        const EVENT_ID = 'demo-event-1';
+
+        function showResult(message, type = 'info') {
+            const resultsDiv = document.getElementById('test-results');
+            const resultElement = document.createElement('div');
+            resultElement.className = `test-section ${type}`;
+            resultElement.innerHTML = message;
+            resultsDiv.appendChild(resultElement);
+        }
+
+        async function apiRequest(url, options = {}) {
+            try {
+                const response = await fetch(url, options);
+                const data = await response.json();
+                return { success: response.ok, status: response.status, data };
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+
+        async function testElementLibrary() {
+            showResult('🔄 Testing element library...', 'info');
+            
+            const result = await apiRequest(`${API_BASE}/library`);
+            
+            if (result.success) {
+                showResult(`✅ Element library loaded successfully! Found ${result.data.length} element types.`, 'success');
+                displayElementLibrary(result.data);
+            } else {
+                showResult(`❌ Failed to load element library: ${result.error || result.status}`, 'error');
+            }
+        }
+
+        async function testVenueLayout() {
+            showResult('🔄 Testing venue layout...', 'info');
+            
+            const result = await apiRequest(`${API_BASE}/events/${EVENT_ID}`);
+            
+            if (result.success) {
+                showResult(`✅ Venue layout loaded successfully! Found ${result.data.elements.length} elements.`, 'success');
+                displayVenueElements(result.data.elements);
+            } else {
+                showResult(`❌ Failed to load venue layout: ${result.error || result.status}`, 'error');
+            }
+        }
+
+        async function testCreateElement() {
+            showResult('🔄 Testing element creation...', 'info');
+            
+            const newElement = {
+                type: 'custom',
+                position: { x: 400, y: 200 },
+                name: 'Frontend Test Element'
+            };
+            
+            const result = await apiRequest(`${API_BASE}/events/${EVENT_ID}/elements/from-library`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newElement)
+            });
+            
+            if (result.success) {
+                showResult(`✅ Element created successfully! ID: ${result.data.id}`, 'success');
+                // Refresh the layout
+                testVenueLayout();
+            } else {
+                showResult(`❌ Failed to create element: ${result.error || result.status}`, 'error');
+            }
+        }
+
+        async function testValidation() {
+            showResult('🔄 Testing layout validation...', 'info');
+            
+            const result = await apiRequest(`${API_BASE}/events/${EVENT_ID}/validate`);
+            
+            if (result.success) {
+                const validation = result.data;
+                let message = `✅ Validation completed! Valid: ${validation.isValid}`;
+                if (validation.errors.length > 0) {
+                    message += `<br>Errors: ${validation.errors.join(', ')}`;
+                }
+                if (validation.warnings.length > 0) {
+                    message += `<br>Warnings: ${validation.warnings.join(', ')}`;
+                }
+                showResult(message, validation.isValid ? 'success' : 'error');
+            } else {
+                showResult(`❌ Failed to validate layout: ${result.error || result.status}`, 'error');
+            }
+        }
+
+        function displayElementLibrary(library) {
+            const libraryDiv = document.getElementById('element-library');
+            libraryDiv.innerHTML = '<div class="element-library">' + 
+                library.map(item => `
+                    <div class="library-item">
+                        <div style="font-size: 24px;">${item.icon || '📦'}</div>
+                        <strong>${item.name}</strong><br>
+                        <small>${item.description}</small><br>
+                        <small>Size: ${item.defaultDimensions.width}×${item.defaultDimensions.height}</small><br>
+                        <small>Color: ${item.defaultColor}</small>
+                    </div>
+                `).join('') + '</div>';
+        }
+
+        function displayVenueElements(elements) {
+            const elementsDiv = document.getElementById('venue-elements');
+            elementsDiv.innerHTML = elements.map(element => `
+                <div class="element-item">
+                    <strong>${element.name}</strong> (${element.type})<br>
+                    Position: (${element.position.x}, ${element.position.y})<br>
+                    Size: ${element.dimensions.width}×${element.dimensions.height}<br>
+                    Color: <span style="background-color: ${element.color}; padding: 2px 8px; color: white;">${element.color}</span>
+                </div>
+            `).join('');
+        }
+
+        // Auto-load data on page load
+        window.onload = function() {
+            testElementLibrary();
+            testVenueLayout();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP Update Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #e3f2fd;
+            color: #1976d2;
+            border: 1px solid #bbdefb;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 RSVP Update Test Tool</h1>
+        <p>This tool tests the RSVP update functionality directly from the browser to identify any frontend issues.</p>
+        
+        <div class="test-section">
+            <h3>1. Backend Connection Test</h3>
+            <button onclick="testBackendConnection()">Test Backend Connection</button>
+            <div id="connectionResult" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>2. Get Guest List</h3>
+            <button onclick="getGuestList()">Get Demo Event Guests</button>
+            <div id="guestListResult" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>3. Update Guest RSVP</h3>
+            <label for="guestId">Guest ID:</label>
+            <input type="text" id="guestId" placeholder="e.g., guest-1" value="guest-1">
+            
+            <label for="guestName">Name:</label>
+            <input type="text" id="guestName" placeholder="Guest Name" value="Test Guest">
+            
+            <label for="rsvpStatus">RSVP Status:</label>
+            <select id="rsvpStatus">
+                <option value="accepted">Accepted</option>
+                <option value="declined">Declined</option>
+                <option value="pending">Pending</option>
+            </select>
+            
+            <label for="dietaryRestrictions">Dietary Restrictions (comma-separated):</label>
+            <input type="text" id="dietaryRestrictions" placeholder="e.g., Vegetarian, No nuts" value="Vegetarian, Gluten-free">
+            
+            <label for="additionalGuests">Additional Guests:</label>
+            <input type="number" id="additionalGuests" value="1" min="0">
+            
+            <label for="specialRequests">Special Requests:</label>
+            <input type="text" id="specialRequests" placeholder="Any special requests" value="Test update from browser">
+            
+            <button onclick="updateGuestRSVP()">Update Guest RSVP</button>
+            <div id="updateResult" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>4. Simulate Frontend Update</h3>
+            <p>This simulates exactly what the React frontend does:</p>
+            <button onclick="simulateFrontendUpdate()">Simulate Frontend RSVP Update</button>
+            <div id="frontendSimResult" class="result" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+        
+        function showResult(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `result ${type}`;
+            element.style.display = 'block';
+        }
+        
+        async function testBackendConnection() {
+            try {
+                showResult('connectionResult', 'Testing backend connection...', 'info');
+                
+                const response = await fetch(`${API_BASE}/guests/demo-event-1`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult('connectionResult', 
+                        `✅ Backend connection successful!
+Status: ${response.status}
+Guests found: ${data.data ? data.data.length : 0}
+Response: ${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    showResult('connectionResult', 
+                        `❌ Backend connection failed!
+Status: ${response.status}
+Error: ${JSON.stringify(data, null, 2)}`, 'error');
+                }
+            } catch (error) {
+                showResult('connectionResult', 
+                    `❌ Backend connection error!
+Error: ${error.message}
+This could be a CORS issue or the backend is not running.`, 'error');
+            }
+        }
+        
+        async function getGuestList() {
+            try {
+                showResult('guestListResult', 'Fetching guest list...', 'info');
+                
+                const response = await fetch(`${API_BASE}/guests/demo-event-1`);
+                const data = await response.json();
+                
+                if (response.ok && data.data) {
+                    const guestList = data.data.map(guest => 
+                        `${guest.name} (${guest.id}) - ${guest.rsvpStatus} - ${guest.phoneNumber}`
+                    ).join('\\n');
+                    
+                    showResult('guestListResult', 
+                        `✅ Guest list retrieved successfully!
+Total guests: ${data.data.length}
+
+Guests:
+${guestList}`, 'success');
+                        
+                    // Auto-fill first guest data
+                    if (data.data.length > 0) {
+                        const firstGuest = data.data[0];
+                        document.getElementById('guestId').value = firstGuest.id;
+                        document.getElementById('guestName').value = firstGuest.name;
+                    }
+                } else {
+                    showResult('guestListResult', 
+                        `❌ Failed to get guest list!
+Status: ${response.status}
+Response: ${JSON.stringify(data, null, 2)}`, 'error');
+                }
+            } catch (error) {
+                showResult('guestListResult', 
+                    `❌ Error fetching guest list!
+Error: ${error.message}`, 'error');
+            }
+        }
+        
+        async function updateGuestRSVP() {
+            try {
+                const guestId = document.getElementById('guestId').value;
+                const guestName = document.getElementById('guestName').value;
+                const rsvpStatus = document.getElementById('rsvpStatus').value;
+                const dietaryRestrictions = document.getElementById('dietaryRestrictions').value;
+                const additionalGuests = parseInt(document.getElementById('additionalGuests').value);
+                const specialRequests = document.getElementById('specialRequests').value;
+                
+                if (!guestId || !guestName) {
+                    showResult('updateResult', '❌ Please fill in Guest ID and Name', 'error');
+                    return;
+                }
+                
+                showResult('updateResult', 'Updating guest RSVP...', 'info');
+                
+                const updateData = {
+                    name: guestName,
+                    rsvpStatus: rsvpStatus,
+                    dietaryRestrictions: dietaryRestrictions.split(',').map(s => s.trim()).filter(s => s),
+                    additionalGuestCount: additionalGuests,
+                    specialRequests: specialRequests
+                };
+                
+                const response = await fetch(`${API_BASE}/guests/${guestId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updateData),
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult('updateResult', 
+                        `✅ RSVP updated successfully!
+Status: ${response.status}
+Updated guest: ${data.data.name}
+RSVP Status: ${data.data.rsvpStatus}
+Dietary Restrictions: ${data.data.dietaryRestrictions.join(', ')}
+Additional Guests: ${data.data.additionalGuestCount}
+Special Requests: ${data.data.specialRequests}
+
+Full response: ${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    showResult('updateResult', 
+                        `❌ RSVP update failed!
+Status: ${response.status}
+Response OK: ${response.ok}
+Error: ${data.error || 'Unknown error'}
+Errors: ${data.errors ? data.errors.join(', ') : 'None'}
+
+Full response: ${JSON.stringify(data, null, 2)}`, 'error');
+                }
+            } catch (error) {
+                showResult('updateResult', 
+                    `❌ RSVP update error!
+Error: ${error.message}
+This could be a network error or CORS issue.`, 'error');
+            }
+        }
+        
+        async function simulateFrontendUpdate() {
+            try {
+                showResult('frontendSimResult', 'Simulating frontend RSVP update process...', 'info');
+                
+                // Step 1: Get a guest (simulate phone lookup)
+                const guestsResponse = await fetch(`${API_BASE}/guests/demo-event-1`);
+                const guestsData = await guestsResponse.json();
+                
+                if (!guestsResponse.ok || !guestsData.data || guestsData.data.length === 0) {
+                    showResult('frontendSimResult', '❌ Could not get guest list for simulation', 'error');
+                    return;
+                }
+                
+                const testGuest = guestsData.data[0];
+                
+                // Step 2: Simulate exact frontend update data
+                const frontendUpdateData = {
+                    name: testGuest.name,
+                    email: testGuest.email || 'test@example.com',
+                    relationshipType: testGuest.relationshipType || 'Friend',
+                    brideOrGroomSide: testGuest.brideOrGroomSide || 'bride',
+                    rsvpStatus: 'accepted',
+                    mealPreference: 'Chicken',
+                    dietaryRestrictions: ['Vegetarian', 'No nuts'],
+                    additionalGuestCount: 1,
+                    specialRequests: 'Frontend simulation test - ' + new Date().toISOString()
+                };
+                
+                // Step 3: Make the exact same request as React frontend
+                const updateResponse = await fetch(`http://localhost:5000/api/guests/${testGuest.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(frontendUpdateData),
+                });
+                
+                // Step 4: Check response like frontend does
+                const responseOk = updateResponse.ok;
+                const updateData = await updateResponse.json();
+                
+                let resultMessage = `Frontend Simulation Results:
+                
+Selected Guest: ${testGuest.name} (${testGuest.id})
+Update Data Sent: ${JSON.stringify(frontendUpdateData, null, 2)}
+
+Response Status: ${updateResponse.status}
+Response OK: ${responseOk}
+Frontend would throw error: ${!responseOk ? 'YES - This is the problem!' : 'NO'}
+
+Response Data: ${JSON.stringify(updateData, null, 2)}`;
+                
+                if (!responseOk) {
+                    const errorMessage = updateData.error || updateData.errors?.join(', ') || 'Failed to update RSVP';
+                    resultMessage += `
+
+❌ FRONTEND ERROR MESSAGE: "${errorMessage}"
+This is exactly what the user sees!`;
+                    showResult('frontendSimResult', resultMessage, 'error');
+                } else {
+                    resultMessage += `
+
+✅ Frontend would proceed to confirmation page successfully!`;
+                    showResult('frontendSimResult', resultMessage, 'success');
+                }
+                
+            } catch (error) {
+                showResult('frontendSimResult', 
+                    `❌ Frontend simulation error!
+Error: ${error.message}
+This indicates a network or CORS issue.`, 'error');
+            }
+        }
+        
+        // Auto-test backend connection on page load
+        window.addEventListener('load', () => {
+            setTimeout(testBackendConnection, 1000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MessageModel = void 0;
+class MessageModel {
+    static validate(input) {
+        const errors = [];
+        if (!input.eventId || input.eventId.trim().length === 0) {
+            errors.push('Event ID is required');
+        }
+        if (!input.recipientId || input.recipientId.trim().length === 0) {
+            errors.push('Recipient ID is required');
+        }
+        if (!input.content || input.content.trim().length === 0) {
+            errors.push('Message content is required');
+        }
+        if (input.content && input.content.length > 4096) {
+            errors.push('Message content cannot exceed 4096 characters');
+        }
+        if (!this.VALID_MESSAGE_TYPES.includes(input.messageType)) {
+            errors.push(`Invalid message type. Must be one of: ${this.VALID_MESSAGE_TYPES.join(', ')}`);
+        }
+        if (input.scheduledAt && isNaN(input.scheduledAt.getTime())) {
+            errors.push('Scheduled date must be a valid date');
+        }
+        if (input.scheduledAt && input.scheduledAt <= new Date()) {
+            errors.push('Scheduled date must be in the future');
+        }
+        return {
+            isValid: errors.length === 0,
+            errors
+        };
+    }
+    static validateUpdate(update) {
+        const errors = [];
+        if (update.content !== undefined) {
+            if (update.content.trim().length === 0) {
+                errors.push('Message content cannot be empty');
+            }
+            if (update.content.length > 4096) {
+                errors.push('Message content cannot exceed 4096 characters');
+            }
+        }
+        if (update.deliveryStatus !== undefined && !this.VALID_DELIVERY_STATUSES.includes(update.deliveryStatus)) {
+            errors.push(`Invalid delivery status. Must be one of: ${this.VALID_DELIVERY_STATUSES.join(', ')}`);
+        }
+        if (update.scheduledAt !== undefined && isNaN(update.scheduledAt.getTime())) {
+            errors.push('Scheduled date must be a valid date');
+        }
+        if (update.sentAt !== undefined && isNaN(update.sentAt.getTime())) {
+            errors.push('Sent date must be a valid date');
+        }
+        return {
+            isValid: errors.length === 0,
+            errors
+        };
+    }
+    static sanitize(input) {
+        return {
+            ...input,
+            content: input.content.trim()
+        };
+    }
+}
+exports.MessageModel = MessageModel;
+MessageModel.VALID_MESSAGE_TYPES = ['invitation', 'reminder', 'confirmation'];
+MessageModel.VALID_DELIVERY_STATUSES = ['pending', 'sent', 'delivered', 'failed'];
+//# sourceMappingURL=Message.js.map

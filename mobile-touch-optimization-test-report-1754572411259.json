@@ -1,0 +1,499 @@
+{
+  "testSuite": "Mobile Touch Optimization",
+  "startTime": "2025-08-07T13:13:31.208Z",
+  "endTime": "2025-08-07T13:13:31.259Z",
+  "totalDuration": "51ms",
+  "results": [
+    {
+      "timestamp": "2025-08-07T13:13:31.209Z",
+      "type": "info",
+      "message": "🚀 Starting Mobile Touch Optimization Test Suite",
+      "testDuration": 8
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.216Z",
+      "type": "test",
+      "message": "Starting test: Touch-Optimized Components Exist",
+      "testDuration": 9
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.217Z",
+      "type": "info",
+      "message": "✓ Found touch-optimized component: rsvp-mobile/components/TouchOptimizedTableArrangement.tsx",
+      "testDuration": 10
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.218Z",
+      "type": "info",
+      "message": "✓ Found touch-optimized component: rsvp-mobile/components/MobileVenueLayoutManager.tsx",
+      "testDuration": 11
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.219Z",
+      "type": "info",
+      "message": "✓ Found touch-optimized component: rsvp-mobile/components/ResponsiveNavigation.tsx",
+      "testDuration": 12
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.220Z",
+      "type": "info",
+      "message": "✓ Touch feature implemented: PanResponder",
+      "testDuration": 12
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.220Z",
+      "type": "info",
+      "message": "✓ Touch feature implemented: Animated",
+      "testDuration": 13
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.221Z",
+      "type": "info",
+      "message": "✓ Touch feature implemented: drag",
+      "testDuration": 13
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.221Z",
+      "type": "info",
+      "message": "✓ Touch feature implemented: touch",
+      "testDuration": 14
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.222Z",
+      "type": "info",
+      "message": "✓ Touch feature implemented: gesture",
+      "testDuration": 15
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.223Z",
+      "type": "info",
+      "message": "✓ Touch feature implemented: DRAG_THRESHOLD",
+      "testDuration": 15
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.224Z",
+      "type": "success",
+      "message": "✅ Test passed: Touch-Optimized Components Exist",
+      "testDuration": 16
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.224Z",
+      "type": "test",
+      "message": "Starting test: Gesture Support in Venue Manager",
+      "testDuration": 17
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.225Z",
+      "type": "info",
+      "message": "✓ Gesture feature implemented: pinch",
+      "testDuration": 18
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.226Z",
+      "type": "info",
+      "message": "✓ Gesture feature implemented: zoom",
+      "testDuration": 18
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.227Z",
+      "type": "info",
+      "message": "✓ Gesture feature implemented: pan",
+      "testDuration": 19
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.227Z",
+      "type": "info",
+      "message": "✓ Gesture feature implemented: scale",
+      "testDuration": 19
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.228Z",
+      "type": "info",
+      "message": "✓ Gesture feature implemented: translateX",
+      "testDuration": 20
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.228Z",
+      "type": "info",
+      "message": "✓ Gesture feature implemented: translateY",
+      "testDuration": 21
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.230Z",
+      "type": "info",
+      "message": "✓ Gesture feature implemented: MIN_SCALE",
+      "testDuration": 22
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.230Z",
+      "type": "info",
+      "message": "✓ Gesture feature implemented: MAX_SCALE",
+      "testDuration": 23
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.231Z",
+      "type": "info",
+      "message": "✓ Gesture state management implemented",
+      "testDuration": 23
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.231Z",
+      "type": "success",
+      "message": "✅ Test passed: Gesture Support in Venue Manager",
+      "testDuration": 23
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.231Z",
+      "type": "test",
+      "message": "Starting test: Responsive Navigation",
+      "testDuration": 24
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.232Z",
+      "type": "info",
+      "message": "✓ Responsive feature implemented: Dimensions",
+      "testDuration": 25
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.233Z",
+      "type": "info",
+      "message": "✓ Responsive feature implemented: orientation",
+      "testDuration": 25
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.233Z",
+      "type": "info",
+      "message": "✓ Responsive feature implemented: landscape",
+      "testDuration": 26
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.234Z",
+      "type": "info",
+      "message": "✓ Responsive feature implemented: screenWidth",
+      "testDuration": 26
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.234Z",
+      "type": "info",
+      "message": "✓ Responsive feature implemented: screenHeight",
+      "testDuration": 27
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.235Z",
+      "type": "info",
+      "message": "✓ Responsive feature implemented: responsive",
+      "testDuration": 27
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.235Z",
+      "type": "info",
+      "message": "✓ Responsive feature implemented: compact",
+      "testDuration": 27
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.235Z",
+      "type": "info",
+      "message": "✓ Adaptive sizing implemented",
+      "testDuration": 28
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.236Z",
+      "type": "success",
+      "message": "✅ Test passed: Responsive Navigation",
+      "testDuration": 28
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.236Z",
+      "type": "test",
+      "message": "Starting test: Mobile UI Patterns",
+      "testDuration": 29
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.237Z",
+      "type": "info",
+      "message": "✓ Mobile UI pattern implemented: SafeAreaView",
+      "testDuration": 30
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.238Z",
+      "type": "info",
+      "message": "✓ Mobile UI pattern implemented: Platform.select",
+      "testDuration": 30
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.238Z",
+      "type": "info",
+      "message": "✓ Mobile UI pattern implemented: BackHandler",
+      "testDuration": 30
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.238Z",
+      "type": "info",
+      "message": "✓ Mobile UI pattern implemented: InteractionManager",
+      "testDuration": 31
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.239Z",
+      "type": "info",
+      "message": "✓ Mobile UI pattern implemented: isLandscape",
+      "testDuration": 31
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.239Z",
+      "type": "info",
+      "message": "✓ Mobile UI pattern implemented: dimensions",
+      "testDuration": 32
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.240Z",
+      "type": "info",
+      "message": "✓ Responsive header patterns implemented",
+      "testDuration": 32
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.240Z",
+      "type": "success",
+      "message": "✅ Test passed: Mobile UI Patterns",
+      "testDuration": 32
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.240Z",
+      "type": "test",
+      "message": "Starting test: Touch-Friendly Sizing",
+      "testDuration": 33
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.241Z",
+      "type": "info",
+      "message": "✓ Touch-friendly sizing found: GUEST_ITEM_HEIGHT = 60",
+      "testDuration": 34
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.242Z",
+      "type": "info",
+      "message": "✓ Touch-friendly sizing found: TABLE_ITEM_HEIGHT = 120",
+      "testDuration": 34
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.242Z",
+      "type": "info",
+      "message": "✓ Drag threshold implemented for touch accuracy",
+      "testDuration": 34
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.242Z",
+      "type": "success",
+      "message": "✅ Test passed: Touch-Friendly Sizing",
+      "testDuration": 35
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.243Z",
+      "type": "test",
+      "message": "Starting test: Platform Optimizations",
+      "testDuration": 35
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.244Z",
+      "type": "info",
+      "message": "✓ Platform optimizations found in TouchOptimizedTableArrangement.tsx",
+      "testDuration": 36
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.245Z",
+      "type": "info",
+      "message": "✓ Platform optimizations found in MobileVenueLayoutManager.tsx",
+      "testDuration": 37
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.245Z",
+      "type": "info",
+      "message": "✓ Platform optimizations found in ResponsiveNavigation.tsx",
+      "testDuration": 37
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.245Z",
+      "type": "success",
+      "message": "✅ Test passed: Platform Optimizations",
+      "testDuration": 38
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.246Z",
+      "type": "test",
+      "message": "Starting test: Gesture Handler Dependencies",
+      "testDuration": 38
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.246Z",
+      "type": "info",
+      "message": "✓ Gesture dependency found: react-native-gesture-handler v~2.20.2",
+      "testDuration": 39
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.247Z",
+      "type": "info",
+      "message": "✓ Gesture dependency found: react-native-reanimated v~3.16.1",
+      "testDuration": 39
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.247Z",
+      "type": "success",
+      "message": "✅ Test passed: Gesture Handler Dependencies",
+      "testDuration": 39
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.247Z",
+      "type": "test",
+      "message": "Starting test: Accessibility Features",
+      "testDuration": 40
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.248Z",
+      "type": "info",
+      "message": "✓ Accessibility features found in TouchOptimizedTableArrangement.tsx: 1",
+      "testDuration": 41
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.249Z",
+      "type": "info",
+      "message": "✓ Accessibility features found in ResponsiveNavigation.tsx: 3",
+      "testDuration": 41
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.249Z",
+      "type": "success",
+      "message": "✅ Test passed: Accessibility Features",
+      "testDuration": 42
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.250Z",
+      "type": "test",
+      "message": "Starting test: Responsive Scaling",
+      "testDuration": 42
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.251Z",
+      "type": "info",
+      "message": "✓ Responsive scaling feature: Dimensions.get",
+      "testDuration": 43
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.251Z",
+      "type": "info",
+      "message": "✓ Responsive scaling feature: addEventListener",
+      "testDuration": 44
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.252Z",
+      "type": "info",
+      "message": "✓ Responsive scaling feature: screenWidth",
+      "testDuration": 44
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.252Z",
+      "type": "info",
+      "message": "✓ Responsive scaling feature: screenHeight",
+      "testDuration": 44
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.252Z",
+      "type": "info",
+      "message": "✓ Responsive scaling feature: scale",
+      "testDuration": 45
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.253Z",
+      "type": "info",
+      "message": "✓ Responsive scaling feature: zoom",
+      "testDuration": 45
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.253Z",
+      "type": "info",
+      "message": "✓ Scale limits implemented",
+      "testDuration": 45
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.253Z",
+      "type": "success",
+      "message": "✅ Test passed: Responsive Scaling",
+      "testDuration": 46
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.254Z",
+      "type": "test",
+      "message": "Starting test: Drag and Drop Implementation",
+      "testDuration": 46
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.255Z",
+      "type": "info",
+      "message": "✓ Drag and drop feature: createPanResponder",
+      "testDuration": 47
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.255Z",
+      "type": "info",
+      "message": "✓ Drag and drop feature: onPanResponderGrant",
+      "testDuration": 47
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.255Z",
+      "type": "info",
+      "message": "✓ Drag and drop feature: onPanResponderMove",
+      "testDuration": 48
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.256Z",
+      "type": "info",
+      "message": "✓ Drag and drop feature: onPanResponderRelease",
+      "testDuration": 48
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.256Z",
+      "type": "info",
+      "message": "✓ Drag and drop feature: dragState",
+      "testDuration": 48
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.256Z",
+      "type": "info",
+      "message": "✓ Drag and drop feature: findDropTarget",
+      "testDuration": 49
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.257Z",
+      "type": "info",
+      "message": "✓ Drag and drop feature: handleDrop",
+      "testDuration": 49
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.257Z",
+      "type": "info",
+      "message": "✓ Visual feedback implemented: 4 features",
+      "testDuration": 49
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.257Z",
+      "type": "success",
+      "message": "✅ Test passed: Drag and Drop Implementation",
+      "testDuration": 50
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.258Z",
+      "type": "info",
+      "message": "\n📊 Test Results: 10/10 tests passed",
+      "testDuration": 50
+    },
+    {
+      "timestamp": "2025-08-07T13:13:31.258Z",
+      "type": "success",
+      "message": "🎉 All mobile touch optimization tests passed!",
+      "testDuration": 51
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "passed": 11,
+    "failed": 0
+  }
+}

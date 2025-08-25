@@ -1,0 +1,8 @@
+name,phoneNumber,dietaryRestrictions,additionalGuestCount,relationshipType,brideOrGroomSide,specialRequests
+,+1234567890,Vegetarian,1,Friend,bride,Missing name error
+John Doe,,Vegetarian,1,Friend,bride,Missing phone error
+Jane Smith,+0987654321,Vegetarian,invalid,Cousin,groom,Invalid additional guest count
+Bob Johnson,+1122334455,Vegetarian,1,InvalidRelationship,bride,Invalid relationship type
+Alice Brown,+5566778899,Vegetarian,1,Friend,invalid_side,Invalid bride/groom side
+Charlie Wilson,invalid-phone,Vegetarian,1,Friend,bride,Invalid phone format
+Diana Davis,+3344556677,Vegetarian,-1,Aunt,groom,Negative additional guest count

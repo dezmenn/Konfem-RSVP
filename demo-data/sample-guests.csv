@@ -1,0 +1,11 @@
+name,phone_number,dietary_restrictions,additional_guest_count,relationship_type,bride_or_groom_side,special_requests
+"Jennifer Martinez","+1555123456","Vegetarian,Gluten-free",1,"Friend","bride","Please seat near the dance floor"
+"Thomas Anderson","+1555123457","",0,"Colleague","groom",""
+"Maria Rodriguez","+1555123458","Vegan",2,"Cousin","bride","Wheelchair accessible seating"
+"James Wilson","+1555123459","",1,"Uncle","groom","No special requests"
+"Sarah Thompson","+1555123460","Lactose-free",0,"Friend","bride","Prefers quiet seating"
+"Daniel Kim","+1555123461","",3,"Sibling","groom","Table near family"
+"Amanda Johnson","+1555123462","Vegetarian",1,"Aunt","bride","Close to restrooms please"
+"Christopher Lee","+1555123463","",0,"Friend","groom","No dietary restrictions"
+"Jessica Brown","+1555123464","Gluten-free,Nut allergy",2,"Cousin","bride","Emergency contact: +1555999999"
+"Michael Davis","+1555123465","",1,"Colleague","groom","Prefers corner table"

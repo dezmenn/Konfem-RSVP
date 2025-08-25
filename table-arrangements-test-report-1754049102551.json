@@ -1,0 +1,93 @@
+{
+  "timestamp": "2025-08-01T11:51:42.550Z",
+  "summary": {
+    "total": 10,
+    "passed": 6,
+    "failed": 4
+  },
+  "results": [
+    {
+      "test": "Basic Auto-Arrangement",
+      "status": "passed",
+      "result": {
+        "success": true,
+        "message": "Successfully arranged 48 guests across 6 tables",
+        "arrangedGuests": 48
+      }
+    },
+    {
+      "test": "Auto-Arrangement with Locked Tables",
+      "status": "failed",
+      "error": "Request failed with status code 404"
+    },
+    {
+      "test": "Dietary Restrictions Grouping",
+      "status": "failed",
+      "error": "Request failed with status code 404"
+    },
+    {
+      "test": "Manual Guest Assignment",
+      "status": "failed",
+      "error": "Request failed with status code 400"
+    },
+    {
+      "test": "Guest Reassignment",
+      "status": "failed",
+      "error": "Request failed with status code 400"
+    },
+    {
+      "test": "Capacity Validation",
+      "status": "passed",
+      "result": {
+        "table": "VIP Table",
+        "capacity": 4,
+        "results": [
+          "✓ Assigned Sarah Johnson (Bride)",
+          "✓ Assigned Robert Johnson",
+          "✓ Assigned Mary Johnson",
+          "❌ Failed to assign Michael Johnson: Request failed with status code 400"
+        ]
+      }
+    },
+    {
+      "test": "Table Lock/Unlock",
+      "status": "passed",
+      "result": {
+        "table": "Table 1",
+        "lockTest": "passed"
+      }
+    },
+    {
+      "test": "Locked Table Preservation",
+      "status": "passed",
+      "result": {
+        "table": "Table 2",
+        "guest": "Sarah Johnson (Bride)",
+        "preserved": true
+      }
+    },
+    {
+      "test": "Export Seating Chart",
+      "status": "passed",
+      "result": {
+        "filename": "demo-seating-chart-1754049102519.pdf",
+        "size": 23,
+        "contentType": "application/pdf"
+      }
+    },
+    {
+      "test": "Export Guest List",
+      "status": "passed",
+      "result": {
+        "filename": "demo-guest-list-1754049102532.csv",
+        "size": 149,
+        "contentType": "text/csv"
+      }
+    }
+  ],
+  "demoConfig": {
+    "guests": 26,
+    "tables": 6,
+    "acceptedGuests": 24
+  }
+}
