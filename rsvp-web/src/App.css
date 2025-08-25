@@ -1,0 +1,76 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 1rem 2rem;
+  color: white;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.App-header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.App-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #61dafb;
+}
+
+.admin-nav {
+  background-color: #343a40;
+  padding: 0 2rem;
+  display: flex;
+  gap: 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.admin-nav a {
+  color: #adb5bd;
+  text-decoration: none;
+  padding: 1rem 1.5rem;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.admin-nav a:hover {
+  color: #fff;
+  background-color: rgba(255,255,255,0.1);
+}
+
+.admin-nav a.active {
+  color: #fff;
+  border-bottom-color: #007bff;
+  background-color: rgba(0,123,255,0.1);
+}
+
+.App-main {
+  flex: 1;
+  padding: 0;
+  background-color: #f5f5f5;
+  min-height: calc(100vh - 180px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .App-main {
+    padding: 1rem;
+  }
+  
+  .App-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .App-header h2 {
+    font-size: 1rem;
+  }
+}

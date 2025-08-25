@@ -1,0 +1,282 @@
+.export-manager {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.export-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.export-header h3 {
+  margin: 0 0 8px 0;
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.export-header p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.export-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.section-label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+/* Export Type Section */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.radio-option:hover {
+  border-color: #007bff;
+  background-color: #f8f9fa;
+}
+
+.radio-option input[type="radio"] {
+  margin: 0;
+  margin-top: 2px;
+}
+
+.radio-option input[type="radio"]:checked + span {
+  color: #007bff;
+  font-weight: 600;
+}
+
+.radio-option input[type="radio"]:checked {
+  accent-color: #007bff;
+}
+
+.radio-option span {
+  font-weight: 500;
+  color: #333;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.radio-option small {
+  color: #666;
+  font-size: 13px;
+  display: block;
+}
+
+.radio-option input[type="radio"]:checked ~ small {
+  color: #555;
+}
+
+/* Format Section */
+.format-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.format-button {
+  padding: 10px 20px;
+  border: 2px solid #e1e5e9;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+.format-button:hover {
+  border-color: #007bff;
+  background-color: #f8f9fa;
+}
+
+.format-button.active {
+  border-color: #007bff;
+  background-color: #007bff;
+  color: white;
+}
+
+.format-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Options Section */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #e1e5e9;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.checkbox-option:hover {
+  background-color: #f8f9fa;
+  border-color: #007bff;
+}
+
+.checkbox-option input[type="checkbox"] {
+  margin: 0;
+  accent-color: #007bff;
+}
+
+.checkbox-option span {
+  color: #333;
+  font-weight: 500;
+}
+
+.checkbox-option input[type="checkbox"]:checked + span {
+  color: #007bff;
+}
+
+.checkbox-option input[type="checkbox"]:disabled {
+  opacity: 0.6;
+}
+
+/* Export Actions */
+.export-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.export-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 180px;
+  justify-content: center;
+}
+
+.export-button:hover:not(:disabled) {
+  background: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.export-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.export-icon {
+  font-size: 18px;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Export Info */
+.export-info {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e1e5e9;
+}
+
+.info-section h4 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.info-section ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #666;
+}
+
+.info-section li {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.info-section strong {
+  color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .export-manager {
+    padding: 16px;
+    margin: 16px;
+  }
+  
+  .export-header h3 {
+    font-size: 20px;
+  }
+  
+  .format-buttons {
+    justify-content: center;
+  }
+  
+  .export-button {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .radio-option {
+    padding: 12px;
+  }
+  
+  .checkbox-option {
+    padding: 10px;
+  }
+}

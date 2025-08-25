@@ -1,0 +1,290 @@
+.confirmation-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.confirmation-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  overflow: hidden;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.confirmation-header {
+  padding: 40px 30px;
+  text-align: center;
+  color: white;
+}
+
+.confirmation-header.accepted {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+}
+
+.confirmation-header.declined {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+}
+
+.confirmation-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: bounce 1s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.confirmation-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 300;
+}
+
+.confirmation-content {
+  padding: 40px 30px;
+}
+
+.confirmation-message h2 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 1.8rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.confirmation-message p {
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.accepted-message {
+  background: #e8f5e8;
+  border: 1px solid #4caf50;
+  border-radius: 8px;
+  padding: 25px;
+  margin: 25px 0;
+}
+
+.accepted-message p {
+  color: #2e7d32;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.next-steps h3 {
+  color: #2e7d32;
+  margin: 0 0 15px 0;
+  font-size: 1.2rem;
+}
+
+.next-steps ul {
+  color: #2e7d32;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.next-steps li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.declined-message {
+  background: #fff3e0;
+  border: 1px solid #ff9800;
+  border-radius: 8px;
+  padding: 25px;
+  margin: 25px 0;
+}
+
+.declined-message p {
+  color: #f57c00;
+  margin-bottom: 10px;
+}
+
+.registration-notice {
+  background: #e3f2fd;
+  border: 1px solid #2196f3;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 25px 0;
+}
+
+.registration-notice p {
+  color: #1976d2;
+  margin-bottom: 8px;
+}
+
+.confirmation-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+  align-items: center;
+}
+
+.update-button,
+.print-button {
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  min-width: 200px;
+  text-align: center;
+}
+
+.update-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.print-button {
+  background: #f5f5f5;
+  color: #333;
+  border: 2px solid #ddd;
+}
+
+.update-button:hover,
+.print-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.confirmation-footer {
+  background: #f8f9fa;
+  padding: 25px 30px;
+  border-top: 1px solid #eee;
+  text-align: center;
+}
+
+.confirmation-footer p {
+  color: #666;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+.contact-info p {
+  color: #999;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.error-message {
+  text-align: center;
+  padding: 40px;
+}
+
+.error-message h2 {
+  color: #d32f2f;
+  margin-bottom: 15px;
+}
+
+.error-message p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.home-button {
+  background: #d32f2f;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.home-button:hover {
+  background: #b71c1c;
+}
+
+/* Print styles */
+@media print {
+  .confirmation-container {
+    background: white;
+    padding: 0;
+  }
+  
+  .confirmation-card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+  
+  .confirmation-actions {
+    display: none;
+  }
+  
+  .confirmation-header {
+    background: #f5f5f5 !important;
+    color: #333 !important;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .confirmation-container {
+    padding: 10px;
+  }
+  
+  .confirmation-header {
+    padding: 30px 20px;
+  }
+  
+  .confirmation-header h1 {
+    font-size: 2rem;
+  }
+  
+  .confirmation-content {
+    padding: 30px 20px;
+  }
+  
+  .confirmation-message h2 {
+    font-size: 1.5rem;
+  }
+  
+  .confirmation-actions {
+    flex-direction: column;
+  }
+  
+  .update-button,
+  .print-button {
+    width: 100%;
+  }
+  
+  .confirmation-footer {
+    padding: 20px;
+  }
+}

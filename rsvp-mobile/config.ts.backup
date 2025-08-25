@@ -1,0 +1,42 @@
+/**
+ * Mobile App Configuration
+ * Handles API base URL for different environments
+ */
+
+import { Platform } from 'react-native';
+
+// Get your computer's IP address for Android testing
+// You can find this by running 'ipconfig' on Windows or 'ifconfig' on Mac/Linux
+const getApiBaseUrl = () => {
+  if (__DEV__) {
+    // Development mode
+    if (Platform.OS === 'android') {
+      // Try WiFi IP first (works for both emulator and physical device)
+      // If this doesn't work, change to 10.0.2.2 for emulator
+      return 'http://192.168.100.55:5000'; // Your WiFi IP
+    } else if (Platform.OS === 'ios') {
+      // iOS simulator can use localhost
+      return 'http://localhost:5000';
+    } else {
+      // Web/Expo web
+      return 'http://localhost:5000';
+    }
+  } else {
+    // Production mode - replace with your production API URL
+    return 'https://your-production-api.com';
+  }
+};
+
+export const API_BASE_URL = getApiBaseUrl();
+
+export const config = {
+  apiBaseUrl: API_BASE_URL,
+  eventId: 'demo-event-1',
+  wsUrl: API_BASE_URL.replace('http', 'ws'),
+};
+
+console.log('Mobile App Config:', {
+  platform: Platform.OS,
+  apiBaseUrl: config.apiBaseUrl,
+  isDev: __DEV__
+});
