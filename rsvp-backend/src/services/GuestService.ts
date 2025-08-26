@@ -53,9 +53,9 @@ export class GuestService {
     }
   }
 
-  async getGuestsByEvent(eventId: string): Promise<Guest[]> {
+  async getGuestsByEvent(eventId: string, filters: GuestFilters = {}): Promise<Guest[]> {
     try {
-      return await this.guestRepository.findByEventId(eventId);
+      return await this.guestRepository.findWithFilters({ ...filters, eventId });
     } catch (error) {
       console.error('Error fetching guests by event:', error);
       return [];

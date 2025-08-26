@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Alert, ActivityIndicator, Linking } from 'react-native';
+import * as FileSystem from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
 import config from '../config';
 
 interface ExportManagerProps {
@@ -69,30 +71,22 @@ const ExportManager: React.FC<ExportManagerProps> = ({ eventId, onExportComplete
         ? contentDisposition.split('filename=')[1]?.replace(/"/g, '')
         : `export-${Date.now()}.${exportFormat}`;
 
-      // For mobile, we'll create a download URL and open it in browser
-      // This allows the user to download the file through their browser
       const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      
-      // Try to open the download URL
-      const canOpen = await Linking.canOpenURL(url);
-      if (canOpen) {
-        await Linking.openURL(url);
-        Alert.alert('Export Complete', `${filename} is ready for download`);
-      } else {
-        // Fallback: show success message with instructions
-        Alert.alert(
-          'Export Complete', 
-          `${filename} has been generated. Please check your downloads folder or use the web version for direct download.`,
-          [
-            { text: 'OK', style: 'default' },
-            { 
-              text: 'Open Web Version', 
-              onPress: () => Linking.openURL(`${config.apiBaseUrl.replace(':5000', ':3000')}/admin/exports`)
-            }
-          ]
-        );
-      }
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = async () => {
+        const base64data = (reader.result as string).split(',')[1];
+        const fileUri = FileSystem.cacheDirectory + filename;
+        await FileSystem.writeAsStringAsync(fileUri, base64data, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+
+        if (await Sharing.isAvailableAsync()) {
+          await Sharing.shareAsync(fileUri);
+        } else {
+          Alert.alert('Export Complete', `File saved at: ${fileUri}`);
+        }
+      };
 
       onExportComplete?.({ success: true, filename });
 

@@ -36,10 +36,10 @@
     "npm": ">=8.0.0"
   },
   "dependencies": {
-    "react-native-paper": "^5.0.0",
-    "react-native-gesture-handler": "^2.0.0",
     "axios": "^1.11.0",
     "bmad-method": "^4.40.0",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "react-native-gesture-handler": "^2.0.0",
+    "react-native-paper": "^5.0.0"
   }
 }

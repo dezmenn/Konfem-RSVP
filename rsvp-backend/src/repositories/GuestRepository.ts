@@ -4,9 +4,9 @@ import { GuestInput, GuestUpdate } from '../models/Guest';
 
 export interface GuestFilters {
   eventId?: string;
-  rsvpStatus?: string;
+  rsvpStatus?: string[];
   relationshipType?: string;
-  brideOrGroomSide?: 'bride' | 'groom';
+  brideOrGroomSide?: ('bride' | 'groom')[];
   search?: string;
 }
 
@@ -57,8 +57,8 @@ export class GuestRepository extends BaseRepository {
       values.push(filters.eventId);
     }
 
-    if (filters.rsvpStatus) {
-      query += ` AND rsvp_status = $${++paramCount}`;
+    if (filters.rsvpStatus && filters.rsvpStatus.length > 0) {
+      query += ` AND rsvp_status = ANY($${++paramCount}::text[])`;
       values.push(filters.rsvpStatus);
     }
 
@@ -67,16 +67,25 @@ export class GuestRepository extends BaseRepository {
       values.push(filters.relationshipType);
     }
 
-    if (filters.brideOrGroomSide) {
-      query += ` AND bride_or_groom_side = $${++paramCount}`;
+    if (filters.brideOrGroomSide && filters.brideOrGroomSide.length > 0) {
+      query += ` AND bride_or_groom_side = ANY($${++paramCount}::text[])`;
       values.push(filters.brideOrGroomSide);
     }
 
     if (filters.search) {
-      query += ` AND (name ILIKE $${++paramCount} OR phone_number ILIKE $${++paramCount})`;
-      const searchPattern = `%${filters.search}%`;
-      values.push(searchPattern, searchPattern);
-      paramCount++; // Increment for the second parameter
+      const searchTerm = filters.search;
+      const searchPattern = `%${searchTerm}%`;
+      
+      query += `
+        AND (
+          name ILIKE $${++paramCount} OR
+          phone_number ILIKE $${paramCount + 1} OR
+          (phone_number LIKE '6%' AND SUBSTRING(phone_number, 2) ILIKE $${paramCount + 2})
+        )
+      `;
+      
+      values.push(searchPattern, searchPattern, searchPattern);
+      paramCount += 2;
     }
 
     query += ' ORDER BY name';

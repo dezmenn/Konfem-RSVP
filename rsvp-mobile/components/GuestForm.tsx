@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { Guest, RelationshipType } from '../types';
 import config from '../config';
+import Picker from './Picker';
 
 interface GuestFormProps {
   eventId: string;
@@ -31,6 +32,9 @@ interface GuestFormData {
   rsvpStatus: 'not_invited' | 'pending' | 'accepted' | 'declined' | 'no_response';
   specialRequests: string;
 }
+
+const RSVP_STATUS_OPTIONS: GuestFormData['rsvpStatus'][] = ['pending', 'accepted', 'declined', 'no_response'];
+const RELATIONSHIP_OPTIONS = Object.values(RelationshipType);
 
 const GuestForm: React.FC<GuestFormProps> = ({
   eventId,
@@ -226,11 +230,12 @@ const GuestForm: React.FC<GuestFormProps> = ({
 
           <View style={styles.formRow}>
             <View style={[styles.formGroup, styles.halfWidth]}>
-              <Text style={styles.label}>Relationship</Text>
-              <View style={styles.pickerContainer}>
-                <Text style={styles.pickerText}>{formData.relationshipType}</Text>
-                {/* Note: In a real app, you'd use a proper picker component */}
-              </View>
+              <Picker
+                label="Relationship"
+                selectedValue={formData.relationshipType}
+                onValueChange={(value) => handleInputChange('relationshipType', value as RelationshipType)}
+                options={RELATIONSHIP_OPTIONS.map(r => ({ label: r, value: r }))}
+              />
             </View>
 
             <View style={[styles.formGroup, styles.halfWidth]}>
@@ -274,12 +279,12 @@ const GuestForm: React.FC<GuestFormProps> = ({
 
           <View style={styles.formRow}>
             <View style={[styles.formGroup, styles.halfWidth]}>
-              <Text style={styles.label}>RSVP Status</Text>
-              <View style={styles.pickerContainer}>
-                <Text style={styles.pickerText}>
-                  {formData.rsvpStatus.replace('_', ' ').toUpperCase()}
-                </Text>
-              </View>
+              <Picker
+                label="RSVP Status"
+                selectedValue={formData.rsvpStatus}
+                onValueChange={(value) => handleInputChange('rsvpStatus', value as GuestFormData['rsvpStatus'])}
+                options={RSVP_STATUS_OPTIONS.map(s => ({ label: s.replace('_', ' '), value: s }))}
+              />
             </View>
 
             <View style={[styles.formGroup, styles.halfWidth]}>
@@ -455,6 +460,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 12,
     backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   sideOptionActive: {
     backgroundColor: '#007bff',

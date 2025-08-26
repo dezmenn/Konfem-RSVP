@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+ import { Router, Request, Response } from 'express';
 import { GuestService } from '../services/GuestService';
 import { MockGuestService } from '../services/MockGuestService';
 import { GuestRepository } from '../repositories/GuestRepository';
@@ -42,7 +42,14 @@ const upload = multer({
 router.get('/:eventId', async (req: Request, res: Response) => {
   try {
     const { eventId } = req.params;
-    const guests = await getGuestService().getGuestsByEvent(eventId);
+    const { rsvpStatus, brideOrGroomSide, search } = req.query;
+
+    const filters: any = { eventId };
+    if (rsvpStatus) filters.rsvpStatus = Array.isArray(rsvpStatus) ? rsvpStatus : [rsvpStatus];
+    if (brideOrGroomSide) filters.brideOrGroomSide = Array.isArray(brideOrGroomSide) ? brideOrGroomSide : [brideOrGroomSide];
+    if (search) filters.search = search;
+
+    const guests = await getGuestService().getGuestsByEvent(eventId, filters);
     res.json({ success: true, data: guests });
   } catch (error) {
     console.error('Error fetching guests:', error);
@@ -56,13 +63,19 @@ router.get('/:eventId/search', async (req: Request, res: Response) => {
     const { eventId } = req.params;
     const { rsvpStatus, relationshipType, brideOrGroomSide, search } = req.query;
 
-    const filters = {
+    const filters: any = {
       eventId,
-      rsvpStatus: rsvpStatus as string,
       relationshipType: relationshipType as string,
-      brideOrGroomSide: brideOrGroomSide as 'bride' | 'groom',
       search: search as string
     };
+
+    if (rsvpStatus) {
+      filters.rsvpStatus = Array.isArray(rsvpStatus) ? rsvpStatus : [rsvpStatus];
+    }
+
+    if (brideOrGroomSide) {
+      filters.brideOrGroomSide = Array.isArray(brideOrGroomSide) ? brideOrGroomSide : [brideOrGroomSide];
+    }
 
     // Remove undefined values
     Object.keys(filters).forEach(key => {

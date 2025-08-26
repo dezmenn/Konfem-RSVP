@@ -13,7 +13,7 @@ import {
 import GuestManagement from './components/GuestManagement';
 import InvitationManagement from './components/InvitationManagement';
 import EventDashboard from './components/EventDashboard';
-import IntegratedVenueManager from './components/IntegratedVenueManager';
+import MobileVenueLayoutManager from './components/MobileVenueLayoutManager';
 import ExportManager from './components/ExportManager';
 import ResponsiveNavigation from './components/ResponsiveNavigation';
 
@@ -70,7 +70,7 @@ export default function App() {
       case 'invitations':
         return <InvitationManagement eventId={eventId} />;
       case 'venue':
-        return <IntegratedVenueManager eventId={eventId} />;
+        return <MobileVenueLayoutManager eventId={eventId} />;
       case 'exports':
         return <ExportManager eventId={eventId} />;
       default:

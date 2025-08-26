@@ -11,7 +11,7 @@ import {
   RefreshControl,
   Platform,
 } from 'react-native';
-import { Guest, RelationshipType } from '../types';
+import { Guest } from '../types';
 import { config } from '../config';
 
 interface GuestListProps {
@@ -23,10 +23,12 @@ interface GuestListProps {
 
 interface GuestFilters {
   search: string;
-  rsvpStatus: string;
-  relationshipType: string;
-  brideOrGroomSide: string;
+  rsvpStatus: string[];
+  brideOrGroomSide: string[];
 }
+
+const RSVP_STATUSES = ['accepted', 'declined', 'pending', 'no_response'];
+const SIDES = ['bride', 'groom'];
 
 const GuestList: React.FC<GuestListProps> = ({
   eventId,
@@ -39,29 +41,43 @@ const GuestList: React.FC<GuestListProps> = ({
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [searchText, setSearchText] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState<GuestFilters>({
+    search: '',
+    rsvpStatus: [],
+    brideOrGroomSide: [],
+  });
+
+  const toggleFilter = (filterName: keyof GuestFilters, value: string) => {
+    setFilters(prevFilters => {
+      const currentValues = prevFilters[filterName] as string[];
+      const newValues = currentValues.includes(value)
+        ? currentValues.filter(v => v !== value)
+        : [...currentValues, value];
+      return { ...prevFilters, [filterName]: newValues };
+    });
+  };
 
   useEffect(() => {
     fetchGuests();
-  }, [eventId]);
+  }, [eventId, filters, searchText]);
 
   const fetchGuests = async () => {
     try {
+      setLoading(true);
       setError(null);
-      
-      const url = searchText 
-        ? `${config.apiBaseUrl}/api/guests/${eventId}/search?search=${encodeURIComponent(searchText)}`
-        : `${config.apiBaseUrl}/api/guests/${eventId}`;
 
-      console.log('Fetching from URL:', url);
-      console.log('Platform:', Platform.OS);
-      console.log('API_BASE_URL:', config.apiBaseUrl);
+      const params = new URLSearchParams();
+      if (searchText) {
+        params.append('search', searchText);
+      }
+      filters.rsvpStatus.forEach(status => params.append('rsvpStatus', status));
+      filters.brideOrGroomSide.forEach(side => params.append('brideOrGroomSide', side));
+      
+      const url = `${config.apiBaseUrl}/api/guests/${eventId}?${params.toString()}`;
 
       const response = await fetch(url);
-      console.log('Response status:', response.status);
-      console.log('Response headers:', response.headers);
-      
       const data = await response.json();
-      console.log('Response data:', data);
 
       if (data.success) {
         setGuests(data.data);
@@ -69,7 +85,11 @@ const GuestList: React.FC<GuestListProps> = ({
         setError('Failed to fetch guests');
       }
     } catch (err) {
-      setError(`Error fetching guests: ${err.message}`);
+      if (err instanceof Error) {
+        setError(`Error fetching guests: ${err.message}`);
+      } else {
+        setError('An unknown error occurred while fetching guests.');
+      }
       console.error('Error fetching guests:', err);
     } finally {
       setLoading(false);
@@ -180,7 +200,7 @@ const GuestList: React.FC<GuestListProps> = ({
     </View>
   );
 
-  if (loading) {
+  if (loading && !refreshing) {
     return (
       <View style={styles.centerContainer}>
         <ActivityIndicator size="large" color="#007bff" />
@@ -216,17 +236,62 @@ const GuestList: React.FC<GuestListProps> = ({
         </View>
       </View>
 
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search guests..."
-          value={searchText}
-          onChangeText={setSearchText}
-          onSubmitEditing={fetchGuests}
-        />
+      <View style={styles.controlsContainer}>
+        <View style={styles.searchContainer}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search guests..."
+            value={searchText}
+            onChangeText={setSearchText}
+            onSubmitEditing={fetchGuests}
+            returnKeyType="search"
+          />
+          <TouchableOpacity style={styles.filterButton} onPress={() => setShowFilters(!showFilters)}>
+            <Text style={styles.filterButtonText}>Filter</Text>
+          </TouchableOpacity>
+        </View>
+
+        {showFilters && (
+          <View style={styles.filterContainer}>
+            <View style={styles.filterGroup}>
+              <Text style={styles.filterTitle}>RSVP Status</Text>
+              <View style={styles.filterOptions}>
+                {RSVP_STATUSES.map(status => (
+                  <TouchableOpacity
+                    key={status}
+                    style={[
+                      styles.optionButton,
+                      filters.rsvpStatus.includes(status) && styles.optionButtonSelected,
+                    ]}
+                    onPress={() => toggleFilter('rsvpStatus', status)}
+                  >
+                    <Text style={[styles.optionButtonText, filters.rsvpStatus.includes(status) && styles.optionButtonTextSelected]}>{status.replace('_', ' ')}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
+            <View style={styles.filterGroup}>
+              <Text style={styles.filterTitle}>Side</Text>
+              <View style={styles.filterOptions}>
+                {SIDES.map(side => (
+                  <TouchableOpacity
+                    key={side}
+                    style={[
+                      styles.optionButton,
+                      filters.brideOrGroomSide.includes(side) && styles.optionButtonSelected,
+                    ]}
+                    onPress={() => toggleFilter('brideOrGroomSide', side)}
+                  >
+                    <Text style={[styles.optionButtonText, filters.brideOrGroomSide.includes(side) && styles.optionButtonTextSelected]}>{side}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
+          </View>
+        )}
       </View>
 
-      {guests.length === 0 ? (
+      {guests.length === 0 && !loading ? (
         <View style={styles.emptyContainer}>
           <Text style={styles.emptyText}>No guests found</Text>
           <TouchableOpacity style={styles.addFirstButton} onPress={onAddGuest}>
@@ -299,19 +364,78 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '600',
   },
-  searchContainer: {
-    padding: 15,
+  controlsContainer: {
     backgroundColor: 'white',
     borderBottomWidth: 1,
     borderBottomColor: '#dee2e6',
   },
+  searchContainer: {
+    flexDirection: 'row',
+    padding: 15,
+    gap: 10,
+    alignItems: 'center',
+  },
   searchInput: {
+    flex: 1,
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 10,
     fontSize: 16,
+    backgroundColor: '#f1f3f5'
+  },
+  filterButton: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    backgroundColor: '#007bff',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  filterButtonText: {
+    color: 'white',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  filterContainer: {
+    paddingHorizontal: 15,
+    paddingTop: 0,
+    paddingBottom: 15,
+  },
+  filterGroup: {
+    marginBottom: 10,
+  },
+  filterTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 8,
+    color: '#495057'
+  },
+  filterOptions: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  optionButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    backgroundColor: '#e9ecef',
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#dee2e6'
+  },
+  optionButtonSelected: {
+    backgroundColor: '#007bff',
+    borderColor: '#0056b3'
+  },
+  optionButtonText: {
+    color: '#495057',
+    fontWeight: '500',
+    textTransform: 'capitalize'
+  },
+  optionButtonTextSelected: {
+    color: 'white',
   },
   listContainer: {
     padding: 15,
@@ -348,6 +472,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 10,
     fontWeight: '600',
+    textTransform: 'uppercase'
   },
   guestPhone: {
     fontSize: 14,

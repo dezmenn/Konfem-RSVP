@@ -13,6 +13,10 @@ inclusion: always
 - Focus on code changes rather than server management
 - use windows powershell syntax
 
+### Mobile Test Setup
+- User test config is making calls to http://192.168.100.55:5000 instead of localhost
+- You can use localhost to test but **DO NOT MODIFY THE IP IN config.ts**
+
 ### Demo Mode Requirements
 - **All tasks before Task 24 should use mock data and demo mode**
 - Set `SKIP_DB_SETUP=true` for demo mode
@@ -58,3 +62,5 @@ inclusion: always
 - **API Endpoint Consistency**: Frontend must use correct backend endpoints (PUT /api/guests/:id/table for assign, DELETE /api/guests/:id/table for unassign) and refresh data after operations.
 - **React State Management**: Remove setTimeout calls from data refresh operations. Trust React's useEffect hooks to automatically trigger UI updates when state changes. Let useEffect([guests, tables]) handle categorizeGuests() calls.
 - **Immediate UI Updates**: After drag & drop operations, call loadGuests() and loadTables() to update state, then let React's built-in state management trigger UI updates automatically without manual timing delays.
+- **Mobile API Configuration**: Mobile React Native components must import and use `config.apiBaseUrl` for all API calls instead of relative paths like `/api/...`. Relative paths don't work in mobile environments. Always use `${config.apiBaseUrl}/api/...` format.
+- **Mobile Position Updates**: When implementing drag-to-move functionality in mobile venue components, ensure the position update API calls use the correct endpoints (`PUT /api/venue-layout/elements/:id` for elements, `PUT /api/tables/:id` for tables) with proper error handling.

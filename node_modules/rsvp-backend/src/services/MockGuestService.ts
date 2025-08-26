@@ -42,10 +42,10 @@ export class MockGuestService {
     return this.demoDataService.getGuestById(id);
   }
 
-  async getGuestsByEvent(eventId: string): Promise<Guest[]> {
+  async getGuestsByEvent(eventId: string, filters: any = {}): Promise<Guest[]> {
     // Get regular guests
     const regularGuests = this.demoDataService.getGuests(eventId);
-    
+
     // Get public RSVP registrations and convert them to guest format
     const publicRegistrations = this.demoDataService.getPublicRSVPRegistrations(eventId);
     const publicGuests = publicRegistrations.map(reg => ({
@@ -67,12 +67,31 @@ export class MockGuestService {
     }));
     
     // Combine regular guests and public registrations
-    return [...regularGuests, ...publicGuests];
+    let allGuests = [...regularGuests, ...publicGuests];
+
+    // Apply filters
+    if (filters.search) {
+      const searchTerm = filters.search.toLowerCase();
+      allGuests = allGuests.filter(guest =>
+        guest.name.toLowerCase().includes(searchTerm) ||
+        guest.phoneNumber.includes(searchTerm)
+      );
+    }
+
+    if (filters.rsvpStatus && filters.rsvpStatus.length > 0) {
+      allGuests = allGuests.filter(guest => filters.rsvpStatus.includes(guest.rsvpStatus));
+    }
+
+    if (filters.brideOrGroomSide && filters.brideOrGroomSide.length > 0) {
+      allGuests = allGuests.filter(guest => filters.brideOrGroomSide.includes(guest.brideOrGroomSide));
+    }
+
+    return allGuests;
   }
 
   async searchGuests(filters: any): Promise<Guest[]> {
     // Use the same logic as getGuestsByEvent to include public registrations
-    let filteredGuests = await this.getGuestsByEvent(filters.eventId || 'demo-event-1');
+    let filteredGuests = await this.getGuestsByEvent(filters.eventId || 'demo-event-1', filters);
 
     if (filters.search) {
       const searchTerm = filters.search.toLowerCase();
@@ -98,8 +117,8 @@ export class MockGuestService {
       }
     }
 
-    if (filters.brideOrGroomSide) {
-      filteredGuests = filteredGuests.filter(guest => guest.brideOrGroomSide === filters.brideOrGroomSide);
+    if (filters.brideOrGroomSide && filters.brideOrGroomSide.length > 0) {
+      filteredGuests = filteredGuests.filter(guest => filters.brideOrGroomSide.includes(guest.brideOrGroomSide));
     }
 
     return filteredGuests;
